@@ -13,12 +13,12 @@
 !/log/.keep
 !/tmp/.keep
 
-/node_modules
-/yarn-error.log
-
 .byebug_history
+
+# Generated js bundles
 /public/packs
 /public/packs-test
 /node_modules
 yarn-debug.log*
+yarn-error.log*
 .yarn-integrity
