@@ -111,7 +111,7 @@ GEM
     minitest (5.11.3)
     multi_json (1.13.1)
     nio4r (2.3.1)
-    nokogiri (1.8.2)
+    nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
     parallel (1.12.1)
     parser (2.5.1.0)
@@ -157,18 +157,17 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.2.2)
-      rake
+    rainbow (3.0.0)
     rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    react_on_rails (11.0.0)
+    react_on_rails (11.0.8)
       addressable
       connection_pool
       execjs (~> 2.5)
       rails (>= 3.2)
-      rainbow (~> 2.2)
+      rainbow (~> 3.0)
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -274,7 +273,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.7)
   rails (~> 5.1.5)
-  react_on_rails (= 11.0.0)
+  react_on_rails (= 11.0.8)
   rspec-rails (~> 3.7)
   rubocop-rails
   sass-rails (~> 5.0)

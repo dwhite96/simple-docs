@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'react_on_rails', '11.0.0'
+gem 'react_on_rails', '11.0.8'
 gem 'mini_racer'
 gem 'webpacker', '~> 3.5'
 
