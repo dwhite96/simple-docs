@@ -25,7 +25,16 @@ module SimpleDocs
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.test_framework :rspec, :fixture => false
+      g.fixture_replacement :factory_bot, :dir => "spec/factories"
+      g.view_specs false
+      g.helpers_spec false
+      g.assets = false
+      g.stylesheets = false
+      g.javascripts = false
+      g.jbuilder = false
+      g.helper = false
+    end
   end
 end
