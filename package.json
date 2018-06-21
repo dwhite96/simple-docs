@@ -1,5 +1,5 @@
 {
-  "name": "ourbox",
+  "name": "simple-docs",
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
