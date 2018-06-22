@@ -9,4 +9,4 @@
 
 console.log('Hello World from Webpacker')
 
-import './hello-world-bundle'
+import './simple-docs-bundle'

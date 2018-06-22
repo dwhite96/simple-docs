@@ -1,8 +1,8 @@
 import ReactOnRails from 'react-on-rails';
 
-import HelloWorldApp from '../bundles/HelloWorld/startup/HelloWorldApp';
+import SimpleDocsApp from '../bundles/SimpleDocs/startup/SimpleDocsApp';
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
-  HelloWorldApp,
+  SimpleDocsApp,
 });
