@@ -5,6 +5,16 @@ class FoldersController < ApplicationController
   # GET /folders.json
   def index
     @folders = Folder.all
+
+    @folders_props = {
+      folderList: {
+        isFetching: false,
+        items: @folders
+      },
+      errorMessage: nil
+    }
+
+    redux_store("simpleDocsStore", props: @folders_props)
   end
 
   # GET /folders/1

@@ -1,8 +1,24 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+
+import api from '../middleware/api';
 import simpleDocsReducer from '../reducers/simpleDocsReducer';
 
-const configureStore = (railsProps) => (
-  createStore(simpleDocsReducer, railsProps)
-);
+const loggerMiddleware = createLogger();
+
+const configureStore = (railsProps) => {
+  const newProps = { ...railsProps };
+
+  return createStore(
+    simpleDocsReducer,
+    newProps,
+    applyMiddleware(
+      thunk,
+      api,
+      loggerMiddleware
+    )
+  )
+};
 
 export default configureStore;

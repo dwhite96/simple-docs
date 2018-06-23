@@ -1,3 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
 export const HELLO_WORLD_NAME_UPDATE = 'HELLO_WORLD_NAME_UPDATE';
+export const NEW_FOLDER_POST = 'NEW_FOLDER_POST';
+export const NEW_FOLDER_SUCCESS = 'NEW_FOLDER_SUCCESS';
+export const NEW_FOLDER_FAILURE = 'NEW_FOLDER_FAILURE';
+export const REQUEST_FOLDER_LIST = 'REQUEST_FOLDER_LIST';
+export const RECEIVE_FOLDER_LIST = 'RECEIVE_FOLDER_LIST';
