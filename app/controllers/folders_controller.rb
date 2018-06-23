@@ -10,11 +10,11 @@ class FoldersController < ApplicationController
       folderList: {
         isFetching: false,
         items: @folders
-      },
-      errorMessage: nil
+      }
+      # errorMessage: nil
     }
 
-    redux_store("simpleDocsStore", props: @folders_props)
+    redux_store("configureStore", props: @folders_props)
   end
 
   # GET /folders/1

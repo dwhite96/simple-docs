@@ -15,7 +15,6 @@ const configureStore = (railsProps) => {
     newProps,
     applyMiddleware(
       thunk,
-      api,
       loggerMiddleware
     )
   )
