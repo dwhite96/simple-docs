@@ -1,14 +1,12 @@
 import React from 'react';
 
-import SimpleDocsContainer from '../containers/SimpleDocsContainer';
-import HelloWorldContainer from '../containers/HelloWorldContainer';
+import Node from '../containers/Node';
 
 const App = () => (
   <div>
     <hr />
-    <SimpleDocsContainer />
+    <Node id="node" />
     <hr />
-    <HelloWorldContainer />
   </div>
 );
 

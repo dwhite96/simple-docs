@@ -8,6 +8,7 @@ import {
   REQUEST_FOLDER_LIST,
   RECEIVE_FOLDER_LIST
 } from '../constants/simpleDocsConstants';
+import node from './index';
 
 const name = (state = '', action) => {
   switch (action.type) {
@@ -21,7 +22,7 @@ const name = (state = '', action) => {
 const folderList = (
   state = {
     isFetching: false,
-    items: [],
+    contents: [],
     lastUpdated: Date.now()
   },
   action
@@ -36,7 +37,7 @@ const folderList = (
       return {
         ...state,
         isFetching: false,
-        items: action.folderList,
+        contents: action.folderList,
         lastUpdated: action.receivedAt
       }
     default:
@@ -44,7 +45,7 @@ const folderList = (
   }
 };
 
-const simpleDocsReducer = combineReducers({ name, folderList });
+const simpleDocsReducer = combineReducers({ name, folderList, node });
 
 export default simpleDocsReducer;
 
@@ -62,20 +63,34 @@ Domain data and application state shape:
     data: {}
   },
 
-  folderList: {
+  folders: {
     isFetching: false,
-    didInvalidate: false,
-    lastUpdated: 1439478405547,
-    items: [
-      {
-        id: number,
-        name: 'string'
+    byId: {
+      1: {
+        id: 1,
+        name: 'string',
+        contents: [10, 11, 15, 17]
       },
-      {
-        id: number,
-        name: 'string'
+      2: {
+        id: 2,
+        name: 'string',
+        contents: [12, 13, 14]
       }
-    ]
+    },
+    allIds: [1, 2]
+  },
+  files: {
+    byId: {
+      1: {
+        id: 1,
+        name: "string"
+      },
+      2: {
+        id: 2,
+        name: "string"
+      }
+    },
+    allIds: [1, 2]
   }
 }
 */

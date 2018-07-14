@@ -37,7 +37,7 @@ export default class FolderList extends React.Component {
             </thead>
 
             <tbody>
-              {this.props.folderList.items.map((folder, i) =>
+              {this.props.folderList.contents.map((folder, i) =>
                 <tr key={i}>
                   <td>{folder.name}</td>
                 </tr>

@@ -4,17 +4,20 @@ class FoldersController < ApplicationController
   # GET /folders
   # GET /folders.json
   def index
-    @folders = Folder.all
+    @folders = Folder.first(2)
+    folder_ids = @folders.map { |f| f.id }
 
-    @folders_props = {
-      folderList: {
-        isFetching: false,
-        items: @folders
-      }
-      # errorMessage: nil
+    folder_tree = {
+      node: {
+        id: "node",
+        name: "My Docs",
+        # counter: 0,
+        childIds: folder_ids
+      },
+      folders: @folders
     }
 
-    redux_store("configureStore", props: @folders_props)
+    redux_store("configureStore", props: folder_tree)
   end
 
   # GET /folders/1
