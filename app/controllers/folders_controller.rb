@@ -1,5 +1,5 @@
 class FoldersController < ApplicationController
-  before_action :set_folder, only: [:show, :edit, :update, :destroy]
+  before_action :set_folder, only: [:edit, :update, :destroy]
 
   # GET /folders
   # GET /folders.json
@@ -14,6 +14,8 @@ class FoldersController < ApplicationController
   # GET /folders/1
   # GET /folders/1.json
   def show
+    folder = Folder.includes(:subfolders).find(params[:id])
+    # render json: folder
   end
 
   # GET /folders/new

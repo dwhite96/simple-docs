@@ -9,3 +9,15 @@
 10.times do |n|
   Folder.create!(name: Faker::Lorem.word)
 end
+
+5.times do |n|
+  Folder.create!(name: Faker::Lorem.word, folder_id: 1)
+end
+
+5.times do |n|
+  Folder.create!(name: Faker::Lorem.word, folder_id: 2)
+end
+
+3.times do |n|
+  Folder.create!(name: Faker::Lorem.word, folder_id: 11)
+end
