@@ -7,10 +7,17 @@ import reducer from '../reducers/index';
 
 const loggerMiddleware = createLogger();
 
-function alignIds(railsProps) {
-  const obj1 = { node: railsProps.node };
+function generateRootFolderTree(railsProps) {
+  const obj1 = {
+    node:
+      {
+        id: "node",
+        name: "My Docs",
+        childIds: extractFolderIds(railsProps)
+      }
+  };
 
-  const obj2 = railsProps.folders.reduce(function(acc, cur, i) {
+  const obj2 = railsProps.reduce(function(acc, cur, i) {
     cur.childIds = [];
     acc[cur.id] = cur;
     return acc;
@@ -19,9 +26,17 @@ function alignIds(railsProps) {
   return Object.assign({}, obj1, obj2);
 };
 
+function extractFolderIds(railsProps) {
+  return (
+    railsProps.map(folder => { return folder.id; })
+  );
+};
+
 const configureStore = (railsProps) => {
-  const alignedProps = alignIds(railsProps);
-  const newProps = { ...alignedProps };
+  const folderProps = generateRootFolderTree(railsProps);
+  const newProps = { ...folderProps };
+
+  console.log("Preloaded State:", newProps);
 
   return createStore(
     reducer,

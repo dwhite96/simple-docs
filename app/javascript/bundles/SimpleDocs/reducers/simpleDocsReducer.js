@@ -57,24 +57,24 @@ user interaction is added to the state shape. See
 https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape for more.
 
 Domain data and application state shape:
+
 {
   folder: {
     isPosting: false,
     data: {}
   },
-
   folders: {
     isFetching: false,
     byId: {
       1: {
         id: 1,
-        name: 'string',
-        contents: [10, 11, 15, 17]
+        name: "string",
+        childIds: [10, 11, 15, 17]
       },
       2: {
         id: 2,
-        name: 'string',
-        contents: [12, 13, 14]
+        name: "string",
+        childIds: [12, 13, 14]
       }
     },
     allIds: [1, 2]
@@ -91,6 +91,48 @@ Domain data and application state shape:
       }
     },
     allIds: [1, 2]
+  }
+}
+
+ui state shape:
+  A top level folder would be myDocuments, myPictures, myVideos, etc.
+
+{
+  ui: {
+    initial uiState: {
+      "myDocuments": [
+        {
+          name: "folder1"
+        },
+        {
+          name: "folder2"
+        }
+      ]
+    },
+    second uiState: {
+      "myDocuments": [
+        {
+          name: "folder1",
+          subFolders: [
+            {
+              name: "folder10"
+            },
+            {
+              name: "folder11"
+            },
+            {
+              name: "file15"
+            },
+            {
+              name: "file17"
+            }
+          ]
+        },
+        {
+          name: "folder2"
+        }
+      ]
+    }
   }
 }
 */

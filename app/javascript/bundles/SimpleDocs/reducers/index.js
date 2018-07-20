@@ -1,4 +1,4 @@
-import { INCREMENT, ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE } from '../actions/nodeActionCreators';
+import { ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE } from '../actions/nodeActionCreators';
 
 const childIds = (state, action) => {
   switch (action.type) {
@@ -19,11 +19,6 @@ const node = (state, action) => {
         name: action.name,
         counter: 0,
         childIds: []
-      };
-    case INCREMENT:
-      return {
-        ...state,
-        counter: state.counter + 1
       };
     case ADD_CHILD:
     case REMOVE_CHILD:

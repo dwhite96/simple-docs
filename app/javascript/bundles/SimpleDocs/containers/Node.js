@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/nodeActionCreators';
 
 export class Node extends Component {
-  handleIncrementClick = () => {
-    const { increment, id } = this.props;
-    increment(id);
-  };
-
   handleAddChildClick = e => {
     e.preventDefault();
 
@@ -41,12 +36,6 @@ export class Node extends Component {
     return (
       <div>
         { name }
-        {' '}
-        Counter:
-        {' '}
-        <button onClick={this.handleIncrementClick}>
-          +
-        </button>
         {' '}
         {typeof parentId !== 'undefined' &&
           <a href="#" onClick={this.handleRemoveClick} // eslint-disable-line jsx-a11y/href-no-hash
