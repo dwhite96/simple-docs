@@ -4,7 +4,7 @@ class FoldersController < ApplicationController
   # GET /folders
   # GET /folders.json
   def index
-    @folders = Folder.all
+    @folders = Folder.first(10)
 
     p @folders.to_json
 
@@ -14,8 +14,11 @@ class FoldersController < ApplicationController
   # GET /folders/1
   # GET /folders/1.json
   def show
-    folder = Folder.includes(:subfolders).find(params[:id])
-    # render json: folder
+    folder = Folder.includes(:contents).find(params[:id])
+
+    p folder.contents.to_json
+
+    render json: folder.contents
   end
 
   # GET /folders/new

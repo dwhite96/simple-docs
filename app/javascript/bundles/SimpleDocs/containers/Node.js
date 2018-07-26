@@ -7,9 +7,8 @@ export class Node extends Component {
   handleAddChildClick = e => {
     e.preventDefault();
 
-    const { addChild, createNode, id } = this.props;
-    const childId = createNode().nodeId;
-    addChild(id, childId);
+    const { fetchFolderContents, id } = this.props;
+    fetchFolderContents(id)
   };
 
   handleRemoveClick = e => {

@@ -3,10 +3,12 @@ export const DELETE_NODE = 'DELETE_NODE';
 export const ADD_CHILD = 'ADD_CHILD';
 export const REMOVE_CHILD = 'REMOVE_CHILD';
 
-let nextId = 0;
-export const createNode = () => ({
+export * from './simpleDocsActionCreators';
+
+export const createNode = (nodeId, name) => ({
   type: CREATE_NODE,
-  nodeId: `new_${nextId++}`
+  nodeId,
+  name
 });
 
 export const deleteNode = (nodeId) => ({

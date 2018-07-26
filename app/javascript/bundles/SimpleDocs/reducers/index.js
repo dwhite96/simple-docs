@@ -17,7 +17,6 @@ const node = (state, action) => {
       return {
         id: action.nodeId,
         name: action.name,
-        counter: 0,
         childIds: []
       };
     case ADD_CHILD:
@@ -45,6 +44,7 @@ const deleteMany = (state, ids) => {
 
 export default (state = {}, action) => {
   const { nodeId } = action;
+
   if (typeof nodeId === 'undefined') {
     return state;
   };
