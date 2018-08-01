@@ -6,8 +6,6 @@ class FoldersController < ApplicationController
   def index
     @folders = Folder.first(10)
 
-    p @folders.to_json
-
     redux_store("configureStore", props: @folders.to_json)
   end
 
@@ -15,8 +13,6 @@ class FoldersController < ApplicationController
   # GET /folders/1.json
   def show
     folder = Folder.includes(:contents).find(params[:id])
-
-    p folder.contents.to_json
 
     render json: folder.contents
   end

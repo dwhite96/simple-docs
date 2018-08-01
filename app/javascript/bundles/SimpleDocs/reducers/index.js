@@ -5,7 +5,8 @@ const childIds = (state, action) => {
     case ADD_CHILD:
       return [ ...state, action.childId ];
     case REMOVE_CHILD:
-      return state.filter(id => id !== action.childId);
+    console.log('childIds', state)
+      return state.filter(id => id !== id);
     default:
       return state;
   };
@@ -21,6 +22,7 @@ const node = (state, action) => {
       };
     case ADD_CHILD:
     case REMOVE_CHILD:
+    console.log('node', state)
       return {
         ...state,
         childIds: childIds(state.childIds, action)
@@ -49,10 +51,11 @@ export default (state = {}, action) => {
     return state;
   };
 
-  if (action.type === DELETE_NODE) {
-    const descendantIds = getAllDescendantIds(state, nodeId);
-    return deleteMany(state, [ nodeId, ...descendantIds ]);
-  };
+  // if (action.type === DELETE_NODE) {
+  //   const descendantIds = getAllDescendantIds(state, nodeId);
+  //   console.log(descendantIds);
+  //   return deleteMany(state, [ ...descendantIds ]);
+  // };
 
   return {
     ...state,

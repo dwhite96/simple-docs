@@ -14,8 +14,8 @@ export class Node extends Component {
   handleRemoveClick = e => {
     e.preventDefault();
 
-    const { removeChild, deleteNode, parentId, id } = this.props;
-    removeChild(parentId, id);
+    const { removeChild, deleteNode, id } = this.props;
+    removeChild(id);
     deleteNode(id);
   };
 
@@ -30,27 +30,24 @@ export class Node extends Component {
   };
 
   render() {
-    const { name, parentId, childIds } = this.props;
+    const { name, childIds } = this.props;
 
     return (
       <div>
-        { name }
+        <a href="#" // eslint-disable-line jsx-a11y/href-no-hash
+          onClick={this.handleAddChildClick}
+          style={{ color: 'lightgray', textDecoration: 'none' }}>
+          +
+        </a>
         {' '}
-        {typeof parentId !== 'undefined' &&
           <a href="#" onClick={this.handleRemoveClick} // eslint-disable-line jsx-a11y/href-no-hash
              style={{ color: 'lightgray', textDecoration: 'none' }}>
-            ×
+            -
           </a>
-        }
+        {' '}
+        { name }
         <ul>
           {childIds.map(this.renderChild)}
-          <li key="add">
-            <a href="#" // eslint-disable-line jsx-a11y/href-no-hash
-              onClick={this.handleAddChildClick}
-            >
-              Add child
-            </a>
-          </li>
         </ul>
       </div>
     );
