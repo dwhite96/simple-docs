@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+
 import * as actions from '../actions/nodeActionCreators';
 
 export class Node extends Component {
@@ -34,19 +35,18 @@ export class Node extends Component {
 
     return (
       <div>
-        <a href="#" // eslint-disable-line jsx-a11y/href-no-hash
-          onClick={this.handleAddChildClick}
-          style={{ color: 'lightgray', textDecoration: 'none' }}>
+        <a href="#" onClick={this.handleAddChildClick} // eslint-disable-line jsx-a11y/href-no-hash
+           style={{ color: 'lightgray', textDecoration: 'none' }}>
           +
         </a>
         {' '}
-          <a href="#" onClick={this.handleRemoveClick} // eslint-disable-line jsx-a11y/href-no-hash
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
-            -
-          </a>
+        <a href="#" onClick={this.handleRemoveClick} // eslint-disable-line jsx-a11y/href-no-hash
+           style={{ color: 'lightgray', textDecoration: 'none' }}>
+          -
+        </a>
         {' '}
         { name }
-        <ul>
+        <ul style={{ listStyleType: 'none' }}>
           {childIds.map(this.renderChild)}
         </ul>
       </div>

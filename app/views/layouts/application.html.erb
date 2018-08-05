@@ -7,14 +7,17 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= javascript_pack_tag    'application' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div id="app_container" class="ui container">
+      <%= yield %>
 
-    <%= redux_store_hydration_data %>
+      <%= redux_store_hydration_data %>
 
-    <%= debug(params) if Rails.env.development? %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
   </body>
 </html>
