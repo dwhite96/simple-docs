@@ -14,11 +14,6 @@ import * as actions from './nodeActionCreators';
 
 const { createNode } = actions;
 
-export const updateName = (text) => ({
-  type: HELLO_WORLD_NAME_UPDATE,
-  text
-});
-
 // Request folder contents from Rails database.
 const requestFolderContents = (id) => ({
   [CALL_API]: {

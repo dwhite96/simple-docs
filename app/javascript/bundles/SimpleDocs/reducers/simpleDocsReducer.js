@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 import {
-  HELLO_WORLD_NAME_UPDATE,
   NEW_FOLDER_POST,
   NEW_FOLDER_SUCCESS,
   NEW_FOLDER_FAILURE,
@@ -9,15 +8,6 @@ import {
   RECEIVE_FOLDER_LIST
 } from '../constants/simpleDocsConstants';
 import node from './index';
-
-const name = (state = '', action) => {
-  switch (action.type) {
-    case HELLO_WORLD_NAME_UPDATE:
-      return action.text;
-    default:
-      return state;
-  }
-};
 
 const folderList = (
   state = {
@@ -45,7 +35,7 @@ const folderList = (
   }
 };
 
-const simpleDocsReducer = combineReducers({ name, folderList, node });
+const simpleDocsReducer = combineReducers({ folderList, node });
 
 export default simpleDocsReducer;
 

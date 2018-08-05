@@ -9,12 +9,11 @@ const loggerMiddleware = createLogger();
 
 function generateRootFolderTree(railsProps) {
   const obj1 = {
-    node:
-      {
-        id: "node",
-        name: "My Docs",
-        childIds: extractFolderIds(railsProps)
-      }
+    node: {
+      id: "node",
+      name: "My Docs",
+      childIds: extractFolderIds(railsProps)
+    }
   };
 
   const obj2 = railsProps.reduce(function(acc, cur, i) {
