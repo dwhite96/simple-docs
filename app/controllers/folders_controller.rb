@@ -4,9 +4,10 @@ class FoldersController < ApplicationController
   # GET /folders
   # GET /folders.json
   def index
-    @folders = Folder.first(10)
+    # Need to find the current user's root folder
+    @folder = Folder.find(1)
 
-    redux_store("configureStore", props: @folders.to_json)
+    redux_store("configureStore", props: @folder.to_json(include: :contents))
   end
 
   # GET /folders/1
@@ -16,6 +17,11 @@ class FoldersController < ApplicationController
 
     render json: folder.contents
   end
+
+  # Alternate show action to pull folder contents from ids sent in params
+  # def show
+  #   folders = Folder.includes(:contents).find(params[:ids])
+  # end
 
   # GET /folders/new
   def new

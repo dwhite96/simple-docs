@@ -2,7 +2,9 @@ export const CREATE_NODE = 'CREATE_NODE';
 export const DELETE_NODE = 'DELETE_NODE';
 export const ADD_CHILD = 'ADD_CHILD';
 export const REMOVE_CHILD = 'REMOVE_CHILD';
+export const SHOW_CHILDREN = 'SHOW_CHILDREN';
 export const HIDE_CHILDREN = 'HIDE_CHILDREN';
+export const CHANGE_CONTENTS_FETCHED_STATUS = 'CHANGE_CONTENTS_FETCHED_STATUS';
 
 export * from './simpleDocsActionCreators';
 
@@ -27,10 +29,4 @@ export const removeChild = (nodeId, childId) => ({
   type: REMOVE_CHILD,
   nodeId,
   childId
-});
-
-export const hideChildren = (nodeId, childIds) => ({
-  type: HIDE_CHILDREN,
-  nodeId,
-  childIds
 });

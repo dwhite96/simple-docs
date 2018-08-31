@@ -8,33 +8,42 @@ import reducer from '../reducers/index';
 const loggerMiddleware = createLogger();
 
 function generateRootFolderTree(railsProps) {
+  const rootId = railsProps.id
+
   const obj1 = {
-    node: {
-      id: "node",
-      name: "My Docs",
-      childIds: extractFolderIds(railsProps)
+    [rootId]: {
+      id: rootId,
+      name: railsProps.name,
+      childIds: extractFolderIds(railsProps),
+      expanded: true,
+      contentsFetched: true
     }
   };
 
-  const obj2 = railsProps.reduce(function(acc, cur, i) {
-    cur.childIds = [];
+  const obj2 = railsProps.contents.reduce(function(acc, cur, i) {
     acc[cur.id] = cur;
+    cur.childIds = [];
+    cur.expanded = false;
+    cur.contentsFetched = false;
     return acc;
   }, {});
 
   return Object.assign({}, obj1, obj2);
 };
 
-function extractFolderIds(railsProps) {
+function extractFolderIds(folder) {
   return (
-    railsProps.map(folder => { return folder.id; })
+    folder.contents.map(item => { return item.id; })
   );
 };
 
 const configureStore = (railsProps) => {
+  console.log(railsProps)
+
   const folderProps = generateRootFolderTree(railsProps);
   const newProps = { ...folderProps };
 
+  console.log("Reducer", reducer);
   console.log("Preloaded State:", newProps);
 
   return createStore(

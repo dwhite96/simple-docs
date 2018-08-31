@@ -6,11 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times do |n|
-  Folder.create!(name: Faker::Lorem.word)
-end
+Folder.create!(name: "My Docs")
 
-5.times do |n|
+10.times do |n|
   Folder.create!(name: Faker::Lorem.word, folder_id: 1)
 end
 
@@ -18,6 +16,10 @@ end
   Folder.create!(name: Faker::Lorem.word, folder_id: 2)
 end
 
+5.times do |n|
+  Folder.create!(name: Faker::Lorem.word, folder_id: 3)
+end
+
 3.times do |n|
-  Folder.create!(name: Faker::Lorem.word, folder_id: 11)
+  Folder.create!(name: Faker::Lorem.word, folder_id: 12)
 end

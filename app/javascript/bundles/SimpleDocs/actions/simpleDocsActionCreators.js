@@ -2,17 +2,32 @@
 import { CALL_API } from '../middleware/api';
 
 import {
-  HELLO_WORLD_NAME_UPDATE,
-  NEW_FOLDER_REQUEST,
-  NEW_FOLDER_SUCCESS,
-  NEW_FOLDER_FAILURE,
+  SHOW_CHILDREN,
+  HIDE_CHILDREN,
+  CHANGE_CONTENTS_FETCHED_STATUS,
   FOLDER_CONTENTS_REQUEST,
   FOLDER_CONTENTS_SUCCESS,
-  FOLDER_CONTENTS_FAILURE
+  FOLDER_CONTENTS_FAILURE,
+  NEW_FOLDER_REQUEST,
+  NEW_FOLDER_SUCCESS,
+  NEW_FOLDER_FAILURE
 } from '../constants/simpleDocsConstants';
 import * as actions from './nodeActionCreators';
 
-const { createNode } = actions;
+export const showChildren = (nodeId) => ({
+  type: SHOW_CHILDREN,
+  nodeId
+})
+
+export const hideChildren = (nodeId) => ({
+  type: HIDE_CHILDREN,
+  nodeId
+});
+
+export const changeContentsFetchedStatus = (nodeId) => ({
+  type: CHANGE_CONTENTS_FETCHED_STATUS,
+  nodeId
+})
 
 // Request folder contents from Rails database.
 const requestFolderContents = (id) => ({
@@ -34,15 +49,18 @@ export const fetchFolderContents = (id) => (dispatch) => {
     console.log(response)
     if (response.type === FOLDER_CONTENTS_SUCCESS) {
       createFolderNodes(id, response.data, dispatch);
+      dispatch(changeContentsFetchedStatus(id));
+      dispatch(showChildren(id));
     }
   });
 };
 
 function createFolderNodes(id, data, dispatch) {
   data.map(folder => {
-    const childId = dispatch(actions.createNode(folder.id, folder.name)).nodeId;
+    const { createNode, addChild } = actions;
+    const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
     console.log(childId);
-    dispatch(actions.addChild(id, childId));
+    dispatch(addChild(id, childId));
   })
 };
 

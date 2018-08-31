@@ -1,4 +1,11 @@
-import { ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE } from '../actions/nodeActionCreators';
+import { ADD_CHILD,
+  REMOVE_CHILD,
+  CREATE_NODE,
+  DELETE_NODE,
+  SHOW_CHILDREN,
+  HIDE_CHILDREN,
+  CHANGE_CONTENTS_FETCHED_STATUS
+} from '../actions/nodeActionCreators';
 
 const childIds = (state, action) => {
   switch (action.type) {
@@ -18,7 +25,9 @@ const node = (state, action) => {
       return {
         id: action.nodeId,
         name: action.name,
-        childIds: []
+        childIds: [],
+        expanded: false,
+        contentsFetched: false
       };
     case ADD_CHILD:
     case REMOVE_CHILD:
@@ -27,10 +36,22 @@ const node = (state, action) => {
         ...state,
         childIds: childIds(state.childIds, action)
       };
+    case SHOW_CHILDREN:
+      return {
+        ...state, expanded: true
+      };
+    case HIDE_CHILDREN:
+      return {
+        ...state, expanded: false
+      };
+    case CHANGE_CONTENTS_FETCHED_STATUS:
+      return {
+        ...state, contentsFetched: true
+      }
     default:
       return state;
   }
-}
+};
 
 const getAllDescendantIds = (state, nodeId) => (
   state[nodeId].childIds.reduce((acc, childId) => (
@@ -51,11 +72,11 @@ export default (state = {}, action) => {
     return state;
   };
 
-  // if (action.type === DELETE_NODE) {
-  //   const descendantIds = getAllDescendantIds(state, nodeId);
-  //   console.log(descendantIds);
-  //   return deleteMany(state, [ ...descendantIds ]);
-  // };
+  // // if (action.type === DELETE_NODE) {
+  // //   const descendantIds = getAllDescendantIds(state, nodeId);
+  // //   console.log(descendantIds);
+  // //   return deleteMany(state, [ ...descendantIds ]);
+  // // };
 
   return {
     ...state,

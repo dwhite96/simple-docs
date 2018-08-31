@@ -5,7 +5,7 @@ import Node from '../containers/Node';
 const App = () => (
   <div>
     <hr />
-    <Node id="node" />
+    <Node id='1' />
     <hr />
   </div>
 );
