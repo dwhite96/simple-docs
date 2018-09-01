@@ -1,0 +1,13 @@
+<div id="nav" class="ui top stackable fixed menu">
+  <%= link_to "SimpleDocs", root_path, class: "link item" %>
+
+  <div class="right menu">
+    <% if user_signed_in? %>
+      <%= link_to "Edit profile", edit_user_registration_path, class: "link item" %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "link item" %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path, class: "link item" %>
+      <%= link_to "Login", new_user_session_path, class: "link item" %>
+    <% end %>
+  </div>
+</div>

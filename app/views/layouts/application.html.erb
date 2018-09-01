@@ -13,6 +13,16 @@
 
   <body>
     <div id="app_container" class="ui container">
+      <header>
+        <%= render "shared/nav" %>
+
+        <div>
+          <% flash.each do |name, msg| -%>
+            <%= content_tag :div, msg, class: name %>
+          <% end -%>
+        </div>
+      </header>
+
       <%= yield %>
 
       <%= redux_store_hydration_data %>

@@ -1,5 +1,6 @@
 class FoldersController < ApplicationController
   before_action :set_folder, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /folders
   # GET /folders.json

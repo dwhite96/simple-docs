@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'react_on_rails', '11.0.8'
 gem 'webpacker', '~> 3.5'
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
