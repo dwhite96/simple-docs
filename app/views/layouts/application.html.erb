@@ -16,6 +16,10 @@
       <header>
         <%= render "shared/nav" %>
 
+        <% if !user_signed_in? %>
+          <h1>Welcome to SimpleDocs!</h1>
+        <% end %>
+
         <div>
           <% flash.each do |name, msg| -%>
             <%= content_tag :div, msg, class: name %>
