@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   after_validation :format_name, on: %i[create update]
 
+  has_many :folders, dependent: :destroy
+
   def format_name
     return unless errors.empty?
     self.first_name = first_name.downcase.titleize

@@ -6,20 +6,27 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Folder.create!(name: "My Docs")
+User.create!(
+  first_name: "David",
+  last_name: "White",
+  email: "daviddwhite75@gmail.com",
+  password: "12345678"
+)
+
+Folder.create!(name: "My Docs", user_id: 1)
 
 10.times do |n|
-  Folder.create!(name: Faker::Lorem.word, folder_id: 1)
+  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 1)
 end
 
 5.times do |n|
-  Folder.create!(name: Faker::Lorem.word, folder_id: 2)
+  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 2)
 end
 
 5.times do |n|
-  Folder.create!(name: Faker::Lorem.word, folder_id: 3)
+  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 3)
 end
 
 3.times do |n|
-  Folder.create!(name: Faker::Lorem.word, folder_id: 12)
+  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 12)
 end

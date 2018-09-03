@@ -103,8 +103,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "associations" do
-    it "has many folders" do
-      is_expected.to have_many :folders
-    end
+    it { is_expected.to have_many :folders }
   end
 end
