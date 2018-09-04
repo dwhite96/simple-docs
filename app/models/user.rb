@@ -24,4 +24,8 @@ class User < ApplicationRecord
   def full_name
     first_name << ' ' << last_name
   end
+
+  def root_folder
+    folders.where(folder_id: nil).first
+  end
 end

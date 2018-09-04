@@ -1,12 +1,11 @@
 class FoldersController < ApplicationController
   before_action :set_folder, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!
 
   # GET /folders
   # GET /folders.json
   def index
     # Need to find the current user's root folder
-    @folder = Folder.find(1)
+    @folder = current_user.root_folder
 
     redux_store("configureStore", props: @folder.to_json(include: :contents))
   end
@@ -18,11 +17,6 @@ class FoldersController < ApplicationController
 
     render json: folder.contents
   end
-
-  # Alternate show action to pull folder contents from ids sent in params
-  # def show
-  #   folders = Folder.includes(:contents).find(params[:ids])
-  # end
 
   # GET /folders/new
   def new
