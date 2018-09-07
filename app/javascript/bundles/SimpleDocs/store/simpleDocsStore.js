@@ -3,12 +3,12 @@ import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import api from '../middleware/api';
-import reducer from '../reducers/index';
+import reducers from '../reducers/index';
 
 const loggerMiddleware = createLogger();
 
 function generateRootFolderTree(railsProps) {
-  const rootId = railsProps.id
+  const rootId = railsProps.id;
 
   const obj1 = {
     [rootId]: {
@@ -38,16 +38,12 @@ function extractFolderIds(folder) {
 };
 
 const configureStore = (railsProps) => {
-  console.log(railsProps)
-
   const folderProps = generateRootFolderTree(railsProps);
   const newProps = { ...folderProps };
-
-  console.log("Reducer", reducer);
   console.log("Preloaded State:", newProps);
 
   return createStore(
-    reducer,
+    reducers,
     newProps,
     applyMiddleware(
       thunk,

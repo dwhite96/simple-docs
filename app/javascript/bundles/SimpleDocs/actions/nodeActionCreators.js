@@ -1,10 +1,11 @@
-export const CREATE_NODE = 'CREATE_NODE';
-export const DELETE_NODE = 'DELETE_NODE';
-export const ADD_CHILD = 'ADD_CHILD';
-export const REMOVE_CHILD = 'REMOVE_CHILD';
-export const SHOW_CHILDREN = 'SHOW_CHILDREN';
-export const HIDE_CHILDREN = 'HIDE_CHILDREN';
-export const CHANGE_CONTENTS_FETCHED_STATUS = 'CHANGE_CONTENTS_FETCHED_STATUS';
+import {
+  CREATE_NODE,
+  DELETE_NODE,
+  ADD_CHILD,
+  REMOVE_CHILD,
+  SHOW_CHILDREN,
+  HIDE_CHILDREN
+} from '../constants/nodeConstants';
 
 export * from './simpleDocsActionCreators';
 
@@ -29,4 +30,14 @@ export const removeChild = (nodeId, childId) => ({
   type: REMOVE_CHILD,
   nodeId,
   childId
+});
+
+export const showChildren = (nodeId) => ({
+  type: SHOW_CHILDREN,
+  nodeId
+})
+
+export const hideChildren = (nodeId) => ({
+  type: HIDE_CHILDREN,
+  nodeId
 });

@@ -6,7 +6,7 @@ import { Icon } from 'semantic-ui-react';
 import * as actions from '../actions/nodeActionCreators';
 
 export class Node extends Component {
-  handleAddChildClick = e => {
+  handleExpandClick = e => {
     e.preventDefault();
 
     const { contentsFetched, fetchFolderContents, showChildren, id } = this.props;
@@ -15,20 +15,26 @@ export class Node extends Component {
     //  contents even is there are none in the current folder saved in the
     //  database. This is not the ideal behavior. Need to pass into props from
     //  rails whether or not a folder instance has any contents and check that here.
-    if (!contentsFetched) {
-      fetchFolderContents(id);
-    } else {
+    if (contentsFetched) {
       showChildren(id);
+    } else {
+      fetchFolderContents(id);
     }
+  };
+
+  handleCollapseClick = e => {
+    e.preventDefault();
+
+    const { hideChildren, id } = this.props;
+    hideChildren(id);
   };
 
   handleRemoveClick = e => {
     e.preventDefault();
 
-    const { hideChildren, removeChild, deleteNode, id } = this.props;
-    hideChildren(id);
-    // removeChild(id);
-    // deleteNode(id);
+    const { removeChild, deleteNode, id } = this.props;
+    removeChild(id);
+    deleteNode(id);
   };
 
   renderChild = childId => {
@@ -47,7 +53,7 @@ export class Node extends Component {
     if (expanded) {
       return (
         <div>
-          <a href="#" onClick={this.handleRemoveClick} // eslint-disable-line jsx-a11y/href-no-hash
+          <a href="#" onClick={this.handleCollapseClick} // eslint-disable-line jsx-a11y/href-no-hash
              style={{ color: 'lightgray', textDecoration: 'none' }}>
             <Icon name='chevron down' />
           </a>
@@ -61,7 +67,7 @@ export class Node extends Component {
     } else {
       return (
         <div>
-          <a href="#" onClick={this.handleAddChildClick} // eslint-disable-line jsx-a11y/href-no-hash
+          <a href="#" onClick={this.handleExpandClick} // eslint-disable-line jsx-a11y/href-no-hash
              style={{ color: 'lightgray', textDecoration: 'none' }}>
             <Icon name='chevron right' />
           </a>
