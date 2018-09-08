@@ -10,4 +10,4 @@
 import 'babel-polyfill';
 
 import './simple-docs-bundle';
-import '../styles/application';
+import '../stylesheets/application';
