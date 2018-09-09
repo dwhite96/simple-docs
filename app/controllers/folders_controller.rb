@@ -75,6 +75,6 @@ class FoldersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
-      params.require(:folder).permit(:name, :user_id, :folder_id)
+      params.require(:folder).permit(:name, :user_id, :folder_id, {files: []})
     end
 end
