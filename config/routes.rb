@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   root 'folders#index'
 
-  resources :folders
+  resources :folders do
+    resources :files, except: %i[index show]
+  end
 end

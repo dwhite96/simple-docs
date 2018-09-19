@@ -1,5 +1,5 @@
 class FoldersController < ApplicationController
-  before_action :set_folder, only: [:edit, :update, :destroy]
+  before_action :set_folder, only: %i[edit update destroy]
 
   # GET /folders
   # GET /folders.json
@@ -34,7 +34,7 @@ class FoldersController < ApplicationController
 
     respond_to do |format|
       if @folder.save
-        format.html { redirect_to @folder, notice: 'Folder was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Folder was successfully created.' }
         format.json { render :show, status: :created, location: @folder }
       else
         format.html { render :new }
@@ -46,9 +46,11 @@ class FoldersController < ApplicationController
   # PATCH/PUT /folders/1
   # PATCH/PUT /folders/1.json
   def update
+    new_files = folder_params['files']
+    add_more_files(new_files) unless new_files.empty?
     respond_to do |format|
-      if @folder.update(folder_params)
-        format.html { redirect_to @folder, notice: 'Folder was successfully updated.' }
+      if @folder.save
+        format.html { redirect_to root_path, notice: 'Folder was successfully updated.' }
         format.json { render :show, status: :ok, location: @folder }
       else
         format.html { render :edit }
@@ -62,7 +64,7 @@ class FoldersController < ApplicationController
   def destroy
     @folder.destroy
     respond_to do |format|
-      format.html { redirect_to folders_url, notice: 'Folder was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Folder was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,5 +78,11 @@ class FoldersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
       params.require(:folder).permit(:name, :user_id, :folder_id, {files: []})
+    end
+
+    def add_more_files(new_files)
+      files = @folder.files
+      files += new_files
+      @folder.files = files
     end
 end
