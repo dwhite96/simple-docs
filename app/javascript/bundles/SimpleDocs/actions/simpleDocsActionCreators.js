@@ -8,7 +8,10 @@ import {
   FOLDER_CONTENTS_FAILURE,
   NEW_FOLDER_REQUEST,
   NEW_FOLDER_SUCCESS,
-  NEW_FOLDER_FAILURE
+  NEW_FOLDER_FAILURE,
+  NEW_FILE_REQUEST,
+  NEW_FILE_SUCCESS,
+  NEW_FILE_FAILURE
 } from '../constants/simpleDocsConstants';
 import * as nodeActions from './nodeActionCreators';
 
@@ -32,20 +35,22 @@ const requestFolderContents = id => ({
 
 // Fetch folder contents thunk.
 export const fetchFolderContents = id => dispatch => {
-  const { showChildren } = nodeActions;
+  const { showChildren, updateNode } = nodeActions;
   return dispatch(requestFolderContents(id))
   .then(response => {
     console.log(response);
     if (response.type === FOLDER_CONTENTS_SUCCESS) {
       createFolderNodes(id, response.data, dispatch);
       dispatch(changeContentsFetchedStatus(id));
+      dispatch(updateNode(id, response.data));
       dispatch(showChildren(id));
     }
   });
 };
 
 function createFolderNodes(id, data, dispatch) {
-  data.map(folder => {
+  console.log(data)
+  data.contents.map(folder => {
     const { createNode, addChild } = nodeActions;
     const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
     dispatch(addChild(id, childId));
@@ -81,6 +86,12 @@ const saveFile = (folder) => ({
     method: 'PATCH',
     folder
   }
+});
+
+// Append new file to folder contents
+const appendNewFile = (file) => ({
+  type: APPEND_NEW_FILE,
+  file
 });
 
 // Upload new file thunk.

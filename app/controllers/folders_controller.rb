@@ -4,18 +4,21 @@ class FoldersController < ApplicationController
   # GET /folders
   # GET /folders.json
   def index
-    # Need to find the current user's root folder
+    # Route to current user's root folder after login
     @folder = current_user.root_folder
 
-    redux_store("configureStore", props: @folder.to_json(include: :contents))
+    redux_store("configureStore", props: @folder.as_json(include: :contents))
   end
 
   # GET /folders/1
   # GET /folders/1.json
   def show
-    folder = Folder.includes(:contents).find(params[:id])
+    @folder = Folder.includes(:contents).find(params[:id])
 
-    render json: folder.contents
+    # See if there is a better way to add filenames at a later date
+    render json: @folder.as_json(include: :contents).merge(
+      { filenames: @folder.extract_filenames }
+    )
   end
 
   # GET /folders/new

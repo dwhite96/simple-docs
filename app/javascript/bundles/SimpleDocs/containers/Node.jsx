@@ -47,8 +47,16 @@ export class Node extends Component {
     );
   };
 
+  renderFile = file => {
+    return (
+      <li key={file}>
+        {file}
+      </li>
+    );
+  };
+
   render() {
-    const { name, childIds, expanded } = this.props;
+    const { name, childIds, filenames, expanded } = this.props;
 
     if (expanded) {
       return (
@@ -61,6 +69,9 @@ export class Node extends Component {
           { name }
           <ul style={{ listStyleType: 'none' }}>
             {childIds.map(this.renderChild)}
+          </ul>
+          <ul style={{ listStyleType: 'none' }}>
+            {filenames.map(this.renderFile)}
           </ul>
         </div>
       );

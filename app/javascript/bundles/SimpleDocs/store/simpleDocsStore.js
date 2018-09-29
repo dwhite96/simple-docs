@@ -9,11 +9,14 @@ const loggerMiddleware = createLogger();
 
 function generateRootFolderTree(railsProps) {
   const rootId = railsProps.id;
+  console.log(railsProps)
 
   const obj1 = {
     [rootId]: {
       id: rootId,
       name: railsProps.name,
+      filenames: [],
+      files: railsProps.files,
       childIds: extractFolderIds(railsProps),
       expanded: true,
       contentsFetched: true
