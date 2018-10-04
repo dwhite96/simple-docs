@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 
 import * as actions from '../actions/nodeActionCreators';
+import FolderRenderer from '../components/FolderRenderer';
 import FileRenderer from '../components/FileRenderer';
 
 export class Node extends Component {
@@ -48,14 +49,6 @@ export class Node extends Component {
     );
   };
 
-  // renderFile = file => {
-  //   return (
-  //     <li key={file}>
-  //       {file}
-  //     </li>
-  //   );
-  // };
-
   render() {
     const { name, childIds, filenames, expanded } = this.props;
 
@@ -67,7 +60,7 @@ export class Node extends Component {
             <Icon name='chevron down' />
           </a>
           {' '}
-          { name }
+          <FolderRenderer name={name} />
           <ul style={{ listStyleType: 'none' }}>
             {childIds.map(this.renderChild)}
           </ul>
@@ -82,7 +75,7 @@ export class Node extends Component {
             <Icon name='chevron right' />
           </a>
           {' '}
-          { name }
+          <FolderRenderer name={name} />
         </div>
       );
     }
