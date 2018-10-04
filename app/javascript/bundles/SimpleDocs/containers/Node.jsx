@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 
 import * as actions from '../actions/nodeActionCreators';
+import FileRenderer from '../components/FileRenderer';
 
 export class Node extends Component {
   handleExpandClick = e => {
@@ -47,13 +48,13 @@ export class Node extends Component {
     );
   };
 
-  renderFile = file => {
-    return (
-      <li key={file}>
-        {file}
-      </li>
-    );
-  };
+  // renderFile = file => {
+  //   return (
+  //     <li key={file}>
+  //       {file}
+  //     </li>
+  //   );
+  // };
 
   render() {
     const { name, childIds, filenames, expanded } = this.props;
@@ -70,9 +71,7 @@ export class Node extends Component {
           <ul style={{ listStyleType: 'none' }}>
             {childIds.map(this.renderChild)}
           </ul>
-          <ul style={{ listStyleType: 'none' }}>
-            {filenames.map(this.renderFile)}
-          </ul>
+          <FileRenderer filenames={filenames} />
         </div>
       );
     } else {
