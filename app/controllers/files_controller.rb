@@ -2,9 +2,11 @@ class FilesController < ApplicationController
   before_action :set_folder, only: %i[new edit update destroy]
 
   def new
+    render 'folders/_file_upload_form'
   end
 
   def edit
+    render 'folders/_file_upload_form'
   end
 
   def create

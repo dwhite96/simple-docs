@@ -7,7 +7,9 @@ class FoldersController < ApplicationController
     # Route to current user's root folder after login
     @folder = current_user.root_folder
 
-    redux_store("configureStore", props: @folder.as_json(include: :contents))
+    redux_store("configureStore", props: @folder.as_json(include: :contents).merge(
+      { filenames: @folder.extract_filenames }
+    ))
   end
 
   # GET /folders/1
@@ -50,7 +52,7 @@ class FoldersController < ApplicationController
   # PATCH/PUT /folders/1.json
   def update
     new_files = folder_params['files']
-    add_more_files(new_files) unless new_files.empty?
+    add_more_files(new_files)
     respond_to do |format|
       if @folder.save
         format.html { redirect_to root_path, notice: 'Folder was successfully updated.' }

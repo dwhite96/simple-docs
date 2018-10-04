@@ -15,7 +15,7 @@ function generateRootFolderTree(railsProps) {
     [rootId]: {
       id: rootId,
       name: railsProps.name,
-      filenames: [],
+      filenames: railsProps.filenames,
       files: railsProps.files,
       childIds: extractFolderIds(railsProps),
       expanded: true,
