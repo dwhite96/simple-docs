@@ -56,7 +56,7 @@ export class Node extends Component {
       return (
         <div>
           <a href="#" onClick={this.handleCollapseClick} // eslint-disable-line jsx-a11y/href-no-hash
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
+          >
             <Icon name='chevron down' />
           </a>
           {' '}
@@ -71,7 +71,7 @@ export class Node extends Component {
       return (
         <div>
           <a href="#" onClick={this.handleExpandClick} // eslint-disable-line jsx-a11y/href-no-hash
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
+          >
             <Icon name='chevron right' />
           </a>
           {' '}
