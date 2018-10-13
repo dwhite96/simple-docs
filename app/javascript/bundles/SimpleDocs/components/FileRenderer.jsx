@@ -1,8 +1,8 @@
 import React from 'react';
 
-const FileRenderer = props => (
+const FileRenderer = ({ filenames }) => (
   <ul style={{ listStyleType: 'none' }}>
-    {props.filenames.map(file =>
+    {filenames.map(file =>
       <li key={file}>
         {file}
       </li>

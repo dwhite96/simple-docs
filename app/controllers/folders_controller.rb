@@ -26,10 +26,17 @@ class FoldersController < ApplicationController
   # GET /folders/new
   def new
     @folder = Folder.new
+
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   # GET /folders/1/edit
   def edit
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   # POST /folders

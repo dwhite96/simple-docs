@@ -1,4 +1,6 @@
 /* eslint-disable import/prefer-default-export */
+import fetch from 'cross-fetch'
+
 import { CALL_API } from '../middleware/api';
 
 import {
@@ -36,6 +38,7 @@ const requestFolderContents = id => ({
 // Fetch folder contents thunk.
 export const fetchFolderContents = id => dispatch => {
   const { showChildren, updateNode } = nodeActions;
+
   return dispatch(requestFolderContents(id))
   .then(response => {
     console.log(response);
@@ -49,7 +52,6 @@ export const fetchFolderContents = id => dispatch => {
 };
 
 function createFolderNodes(id, data, dispatch) {
-  console.log(data)
   data.contents.map(folder => {
     const { createNode, addChild } = nodeActions;
     const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
@@ -78,29 +80,7 @@ export const submitNewFolder = folder => dispatch => {
   });
 };
 
-// Save a new file to designated storage.
-const saveFile = (folder) => ({
-  [CALL_API]: {
-    types: [ NEW_FILE_REQUEST, NEW_FILE_SUCCESS, NEW_FILE_FAILURE ],
-    url: `/folders/${folder.id}.json'`,
-    method: 'PATCH',
-    folder
-  }
-});
-
-// Append new file to folder contents
 const appendNewFile = (file) => ({
   type: APPEND_NEW_FILE,
   file
 });
-
-// Upload new file thunk.
-export const uploadFile = file => dispatch => {
-  return dispatch(saveFile(folder))
-  .then(response => {
-    console.log(response);
-    if (response.type === NEW_FILE_SUCCESS) {
-      dispatch(appendNewFile(response.data));
-    }
-  });
-};

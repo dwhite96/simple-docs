@@ -1,4 +1,5 @@
 import { camelizeKeys } from 'humps'
+import fetch from 'cross-fetch'
 import ReactOnRails from 'react-on-rails'
 
 // Fetches an API response
