@@ -10,8 +10,7 @@ import FileRenderer from '../components/FileRenderer';
 
 export class Node extends Component {
   static propTypes = {
-    contentsFetched: PropTypes.bool.isRequired,
-    uploadFile: PropTypes.func.isRequired
+    contentsFetched: PropTypes.bool.isRequired
   };
 
   handleExpandClick = e => {
