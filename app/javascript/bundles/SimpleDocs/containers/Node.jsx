@@ -1,11 +1,18 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
 
 import * as actions from '../actions/nodeActionCreators';
+import FolderRenderer from '../components/FolderRenderer';
+import FileRenderer from '../components/FileRenderer';
 
 export class Node extends Component {
+  static propTypes = {
+    contentsFetched: PropTypes.bool.isRequired
+  };
+
   handleExpandClick = e => {
     e.preventDefault();
 
@@ -48,31 +55,32 @@ export class Node extends Component {
   };
 
   render() {
-    const { name, childIds, expanded } = this.props;
+    const { id, name, childIds, filenames, expanded } = this.props;
 
     if (expanded) {
       return (
         <div>
           <a href="#" onClick={this.handleCollapseClick} // eslint-disable-line jsx-a11y/href-no-hash
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
+          >
             <Icon name='chevron down' />
           </a>
           {' '}
-          { name }
+          <FolderRenderer id={id} name={name} />
           <ul style={{ listStyleType: 'none' }}>
             {childIds.map(this.renderChild)}
           </ul>
+          <FileRenderer filenames={filenames} />
         </div>
       );
     } else {
       return (
         <div>
           <a href="#" onClick={this.handleExpandClick} // eslint-disable-line jsx-a11y/href-no-hash
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
+          >
             <Icon name='chevron right' />
           </a>
           {' '}
-          { name }
+          <FolderRenderer id={id} name={name} />
         </div>
       );
     }

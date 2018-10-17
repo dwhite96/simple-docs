@@ -36,6 +36,9 @@ gem 'react_on_rails', '11.0.8'
 gem 'webpacker', '~> 3.5'
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
+gem 'semantic-ui-sass'
+gem 'popper_js', '~> 1.14.3'
+gem 'bootstrap', '~> 4.1.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,10 +1,12 @@
 import {
   CREATE_NODE,
+  UPDATE_NODE,
   DELETE_NODE,
   ADD_CHILD,
   REMOVE_CHILD,
   SHOW_CHILDREN,
-  HIDE_CHILDREN
+  HIDE_CHILDREN,
+  APPEND_NEW_FILE
 } from '../constants/nodeConstants';
 
 export * from './simpleDocsActionCreators';
@@ -13,6 +15,12 @@ export const createNode = (nodeId, name) => ({
   type: CREATE_NODE,
   nodeId,
   name
+});
+
+export const updateNode = (nodeId, data) => ({
+  type: UPDATE_NODE,
+  nodeId,
+  data
 });
 
 export const deleteNode = (nodeId) => ({

@@ -2,10 +2,12 @@ import {
   ADD_CHILD,
   REMOVE_CHILD,
   CREATE_NODE,
+  UPDATE_NODE,
   DELETE_NODE,
   SHOW_CHILDREN,
   HIDE_CHILDREN,
-  CHANGE_CONTENTS_FETCHED_STATUS
+  CHANGE_CONTENTS_FETCHED_STATUS,
+  APPEND_NEW_FILE
 } from '../constants/nodeConstants';
 
 const childIds = (state, action) => {
@@ -25,10 +27,15 @@ const node = (state, action) => {
       return {
         id: action.nodeId,
         name: action.name,
+        filenames: [],
+        files: [],
         childIds: [],
         expanded: false,
         contentsFetched: false
       };
+    case UPDATE_NODE:
+      console.log(action.data);
+      return { ...state, ...action.data };
     case ADD_CHILD:
     case REMOVE_CHILD:
       return {
@@ -47,6 +54,8 @@ const node = (state, action) => {
       return {
         ...state, contentsFetched: true
       }
+    case APPEND_NEW_FILE:
+      return [ ...state, action.file ];
     default:
       return state;
   };
