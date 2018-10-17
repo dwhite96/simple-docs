@@ -58,10 +58,10 @@ class FoldersController < ApplicationController
   # PATCH/PUT /folders/1
   # PATCH/PUT /folders/1.json
   def update
-    new_files = folder_params['files']
-    add_more_files(new_files)
+    add_more_files(folder_params['files']) if folder_params['files']
+
     respond_to do |format|
-      if @folder.save
+      if @folder.update(folder_params)
         format.html { redirect_to root_path, notice: 'Folder was successfully updated.' }
         format.json { render :show, status: :ok, location: @folder }
       else

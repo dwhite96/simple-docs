@@ -1,26 +1,58 @@
 class FilesController < ApplicationController
-  before_action :set_folder, only: %i[new edit update destroy]
+  before_action :set_folder, only: %i[new edit create update destroy]
 
+  # GET /folders/:folder_id/files/new
   def new
-    render 'folders/_file_upload_form'
+    respond_to do |format|
+      format.js {}
+    end
   end
 
+  # GET /folders/:folder_id/files/:id/edit
   def edit
-    render 'folders/_file_upload_form'
+    respond_to do |format|
+      format.js {}
+    end
   end
 
+  # POST /folders/:folder_id/files
   def create
-    add_more_files(files_params['files'])
-    flash[:error] = "Failed uploading files" unless @folder.save
-    redirect_to root_path
+    add_files(files_params['files']) if files_params['files']
+
+    # flash[:error] = "Failed uploading files" unless @folder.save
+    # redirect_to root_path
+
+    respond_to do |format|
+      if @folder.save
+        format.html { redirect_to root_path, notice: 'File was successfully created.' }
+        format.json { render json: { filenames: @folder.extract_filenames } }
+      else
+        format.html { render :new }
+        format.json { render json: @folder.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
+  # PATCH/PUT /folders/:folder_id/files/:id
   def update
-    add_more_files(files_params['files'])
-    flash[:error] = "Failed uploading files" unless @folder.save
-    redirect_to root_path
+    add_files(files_params['files']) if files_params['files']
+
+    # flash[:error] = "Failed uploading files" unless @folder.save
+    # redirect_to root_path
+
+
+    respond_to do |format|
+      if @folder.update(files_params)
+        format.html { redirect_to root_path, notice: 'File was successfully updated.' }
+        format.json { render json: { filenames: @folder.extract_filenames } }
+      else
+        format.html { render :edit }
+        format.json { render json: @folder.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
+  # DELETE /folders/:folder_id/files/:id
   def destroy
     remove_file_at_index(params[:id].to_i)
     flash[:error] = "Failed deleting file" unless @folder.save
@@ -33,7 +65,11 @@ class FilesController < ApplicationController
     @folder = Folder.find(params[:folder_id])
   end
 
-  def add_more_files(new_files)
+  def set_file
+    @file = @folder.files[params[:id].to_i]
+  end
+
+  def add_files(new_files)
     files = @folder.files
     files += new_files
     @folder.files = files
@@ -47,6 +83,6 @@ class FilesController < ApplicationController
   end
 
   def files_params
-    params.require(:folder).permit({files: []})
+    params.permit({files: []})
   end
 end
