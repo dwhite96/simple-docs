@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
 
-import '../stylesheets/simple_docs.scss'
+import FormModal from './FormModal';
+import '../stylesheets/simple_docs.scss';
 
 const FolderRenderer = ({ id, name }) => (
   <span>
@@ -11,6 +12,9 @@ const FolderRenderer = ({ id, name }) => (
     <div id='folder-dropdown'>
       <Dropdown direction='left' icon='sidebar'>
         <Dropdown.Menu>
+          <Dropdown.Item>
+            <FormModal />
+          </Dropdown.Item>
           <a className="item" data-remote="true" href={`/folders/${id}/files/new`}>
             Upload file
           </a>
