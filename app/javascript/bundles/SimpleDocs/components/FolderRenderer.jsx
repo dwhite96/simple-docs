@@ -15,13 +15,25 @@ const FolderRenderer = ({ id, name }) => (
           <Dropdown.Item>
             <FormModal />
           </Dropdown.Item>
-          <a className="item" data-remote="true" href={`/folders/${id}/files/new`}>
+          <a className="item"
+            data-remote="true"
+            rel="nofollow"
+            href={`/folders/${id}/files/new`}
+          >
             Upload file
           </a>
           <Dropdown.Item text='Rename' description='ctrl + r' />
           <Dropdown.Item text='Make a copy' />
           <Dropdown.Item icon='folder' text='Move to folder' />
-          <Dropdown.Item icon='trash' text='Delete' />
+          <a className="item"
+            data-remote="true"
+            data-confirm="Are you sure?"
+            rel="nofollow"
+            data-method="delete"
+            href={`/folders/${id}/`}
+          >
+            <Dropdown.Item icon='trash' text='Delete folder' />
+          </a>
         </Dropdown.Menu>
       </Dropdown>
     </div>
