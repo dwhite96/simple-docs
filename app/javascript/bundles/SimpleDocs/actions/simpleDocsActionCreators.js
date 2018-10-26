@@ -51,6 +51,18 @@ export const fetchFolderContents = id => dispatch => {
   });
 };
 
+// Update folder node.
+export const updateFolderNode = folder => dispatch => {
+  if (typeof folder === 'undefined') {
+    return console.log(folder);
+  }
+  console.log(folder);
+
+  const { createNode, addChild } = nodeActions;
+  const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
+  dispatch(addChild(folder.folder_id, childId));
+};
+
 function createFolderNodes(id, data, dispatch) {
   data.contents.map(folder => {
     const { createNode, addChild } = nodeActions;
@@ -58,6 +70,27 @@ function createFolderNodes(id, data, dispatch) {
     dispatch(addChild(id, childId));
   })
 };
+
+// May use the following actions in the future if cable connection
+//  is made via middleware.
+// // Action creator with received function:
+// export const subscribeFeed = feedId => {
+//   return dispatch => dispatch({
+//     channel: 'FoldersChannel',
+//     feed: `feed_${feedId}`,
+//     received: data => dispatch({
+//       type: NEW_DATA,
+//       payload: data
+//     }),
+//   });
+// };
+
+// // Unsubscribe to FoldersChannel feed.
+// export const unsubscribeFeed = feedId => ({
+//   channel: 'FoldersChannel',
+//   feed: `feed_${feedId}`,
+//   leave: true
+// });
 
 // Post a new folder to Rails database.
 const postNewFolder = folder => ({

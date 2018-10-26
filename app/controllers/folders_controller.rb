@@ -25,6 +25,8 @@ class FoldersController < ApplicationController
 
   # GET /folders/new
   def new
+    # Next step: When creating a new folder, need to set new folder record as subfolder
+    # parent folder sent in params
     @folder = Folder.new
 
     respond_to do |format|
@@ -40,18 +42,19 @@ class FoldersController < ApplicationController
   end
 
   # POST /folders
-  # POST /folders.json
   def create
     @folder = current_user.folders.build(folder_params)
+    parent_folder = Folder.find(1)
+    @folder.folder_id = parent_folder.id
 
-    respond_to do |format|
-      if @folder.save
-        format.html { redirect_to root_path, notice: 'Folder was successfully created.' }
-        format.json { render :show, status: :created, location: @folder }
-      else
-        format.html { render :new }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
-      end
+    # Generate :js response to close rails form modal and
+    #   then broadcast data via websocket to react component.
+    if @folder.save
+      respond_to :js
+      flash.now[:notice] = 'Folder was successfully created.'
+      FoldersChannel.broadcast_to(current_user, @folder)
+    else
+      flash.now[:error] = 'Folder could not be created.'
     end
   end
 
@@ -82,19 +85,20 @@ class FoldersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_folder
-      @folder = Folder.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def folder_params
-      params.require(:folder).permit(:name, :user_id, :folder_id, {files: []})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_folder
+    @folder = Folder.find(params[:id])
+  end
 
-    def add_more_files(new_files)
-      files = @folder.files
-      files += new_files
-      @folder.files = files
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def folder_params
+    params.require(:folder).permit(:name, :user_id, :folder_id, {files: []})
+  end
+
+  def add_more_files(new_files)
+    files = @folder.files
+    files += new_files
+    @folder.files = files
+  end
 end

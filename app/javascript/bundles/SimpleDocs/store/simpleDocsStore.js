@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger';
 import api from '../middleware/api';
 import reducers from '../reducers/index';
 
-const loggerMiddleware = createLogger();
+const logger = createLogger();
 
 function generateRootFolderTree(railsProps) {
   const rootId = railsProps.id;
@@ -51,7 +51,7 @@ const configureStore = (railsProps) => {
     applyMiddleware(
       thunk,
       api,
-      loggerMiddleware
+      logger
     )
   );
 };

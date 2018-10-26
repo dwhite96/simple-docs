@@ -1,5 +1,5 @@
 <div class="ui form">
-  <%= form_with(model: folder, local: true) do |form| %>
+  <%= form_with(model: folder) do |form| %>
     <% if folder.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
