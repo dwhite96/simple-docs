@@ -25,27 +25,19 @@ class FoldersController < ApplicationController
 
   # GET /folders/new
   def new
-    # Next step: When creating a new folder, need to set new folder record as subfolder
-    # parent folder sent in params
-    @folder = Folder.new
+    @folder = Folder.new(folder_id: params[:folder_id].to_i)
 
-    respond_to do |format|
-      format.js {}
-    end
+    respond_to :js
   end
 
   # GET /folders/1/edit
   def edit
-    respond_to do |format|
-      format.js {}
-    end
+    respond_to :js
   end
 
   # POST /folders
   def create
     @folder = current_user.folders.build(folder_params)
-    parent_folder = Folder.find(1)
-    @folder.folder_id = parent_folder.id
 
     # Generate :js response to close rails form modal and
     #   then broadcast data via websocket to react component.

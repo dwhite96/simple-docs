@@ -12,9 +12,14 @@ const FolderRenderer = ({ id, name }) => (
     <div id='folder-dropdown'>
       <Dropdown direction='left' icon='sidebar'>
         <Dropdown.Menu>
-          <Dropdown.Item>
-            <FormModal />
-          </Dropdown.Item>
+          <a id="current_folder_id"
+            className="item"
+            data-remote="true"
+            rel="nofollow"
+            href={`/folders/new?folder_id=${id}`}
+          >
+            <Dropdown.Item icon='folder' text=' New subfolder' />
+          </a>
           <a className="item"
             data-remote="true"
             rel="nofollow"
@@ -32,7 +37,7 @@ const FolderRenderer = ({ id, name }) => (
             data-method="delete"
             href={`/folders/${id}/`}
           >
-            <Dropdown.Item icon='trash' text='Delete folder' />
+            <Dropdown.Item icon='trash' text=' Delete folder' />
           </a>
         </Dropdown.Menu>
       </Dropdown>
