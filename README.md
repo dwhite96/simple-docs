@@ -2,8 +2,7 @@
 
 SimpleDocs is a Dropbox/Google Drive clone used to demo React components using Ruby on Rails as a backend.
 This app is not intended to be used commercially. It features a React tree structure UI for folders and
-files similar to macOS Finder. Feel free to clone to your local machine to run and play around with.
-
+files similar to macOS Finder. Code for this "tree view" is based on <a href="https://github.com/reduxjs/redux/tree/master/examples/tree-view" target="_blank">this</a> Redux example. Feel free to clone this repository to your local machine to run and play around with.
 
 - Ruby version: 2.4.1
 
