@@ -36,14 +36,6 @@ export class Node extends Component {
     hideChildren(id);
   };
 
-  handleRemoveClick = e => {
-    e.preventDefault();
-
-    const { removeChild, deleteNode, id } = this.props;
-    removeChild(id);
-    deleteNode(id);
-  };
-
   renderChild = childId => {
     const { id } = this.props;
 
