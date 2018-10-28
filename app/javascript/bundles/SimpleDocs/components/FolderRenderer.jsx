@@ -37,7 +37,7 @@ const FolderRenderer = ({ id, name }) => (
             data-method="delete"
             href={`/folders/${id}`}
           >
-            <Dropdown.Item icon='trash' text=' Delete folder' />
+            <Dropdown.Item icon='trash' text=' Delete' />
           </a>
         </Dropdown.Menu>
       </Dropdown>
