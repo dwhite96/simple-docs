@@ -7,22 +7,22 @@ import '../stylesheets/simple_docs.scss';
 
 const FolderRenderer = ({ id, name }) => (
   <span>
-    {name}
     {' '}
+    {name}
     <div id='folder-dropdown'>
       <Dropdown direction='left' icon='sidebar'>
         <Dropdown.Menu>
-          <a id="current_folder_id"
-            className="item"
-            data-remote="true"
-            rel="nofollow"
+          <a id='current_folder_id'
+            className='item'
+            data-remote='true'
+            rel='nofollow'
             href={`/folders/new?folder_id=${id}`}
           >
             <Dropdown.Item icon='folder' text=' New subfolder' />
           </a>
-          <a className="item"
-            data-remote="true"
-            rel="nofollow"
+          <a className='item'
+            data-remote='true'
+            rel='nofollow'
             href={`/folders/${id}/files/new`}
           >
             Upload file
@@ -30,11 +30,11 @@ const FolderRenderer = ({ id, name }) => (
           <Dropdown.Item text='Rename' description='ctrl + r' />
           <Dropdown.Item text='Make a copy' />
           <Dropdown.Item icon='folder' text='Move to folder' />
-          <a className="item"
-            data-remote="true"
-            data-confirm="Are you sure?"
-            rel="nofollow"
-            data-method="delete"
+          <a className='item'
+            data-remote='true'
+            data-confirm='Are you sure?'
+            rel='nofollow'
+            data-method='delete'
             href={`/folders/${id}`}
           >
             <Dropdown.Item icon='trash' text=' Delete' />

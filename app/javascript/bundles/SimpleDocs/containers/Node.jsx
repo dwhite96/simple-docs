@@ -57,6 +57,7 @@ export class Node extends Component {
             <Icon name='chevron down' />
           </a>
           {' '}
+          <Icon name='folder open' />
           <FolderRenderer id={id} name={name} />
           <ul style={{ listStyleType: 'none' }}>
             {childIds.map(this.renderChild)}
@@ -72,6 +73,7 @@ export class Node extends Component {
             <Icon name='chevron right' />
           </a>
           {' '}
+          <Icon name='folder' />
           <FolderRenderer id={id} name={name} />
         </div>
       );
