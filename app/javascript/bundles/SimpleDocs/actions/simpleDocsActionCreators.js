@@ -51,24 +51,33 @@ export const fetchFolderContents = id => dispatch => {
   });
 };
 
-// Update folder node.
-export const updateFolderNode = folder => dispatch => {
-  if (typeof folder === 'undefined') {
-    return console.log(folder);
-  }
-  console.log(folder);
-
-  const { createNode, addChild } = nodeActions;
-  const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
-  dispatch(addChild(folder.folder_id, childId));
-};
-
 function createFolderNodes(id, data, dispatch) {
   data.contents.map(folder => {
     const { createNode, addChild } = nodeActions;
     const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
     dispatch(addChild(id, childId));
   })
+};
+
+export const updateFolderNode = folder => dispatch => {
+  if (typeof folder === 'undefined') {
+    return console.log(folder);
+  }
+
+  if (typeof folder.name === 'undefined') {
+    return deleteFolderNode(folder.id, folder.folder_id, dispatch);
+  }
+
+  const { createNode, addChild } = nodeActions;
+
+  const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
+  dispatch(addChild(folder.folder_id, childId));
+};
+
+function deleteFolderNode(id, parentId, dispatch) {
+  const { removeChild, deleteNode } = nodeActions;
+  dispatch(removeChild(parentId, id));
+  dispatch(deleteNode(id));
 };
 
 // May use the following actions in the future if cable connection

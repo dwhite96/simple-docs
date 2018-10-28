@@ -15,7 +15,7 @@ const childIds = (state, action) => {
     case ADD_CHILD:
       return [ ...state, action.childId ];
     case REMOVE_CHILD:
-      return state.filter(id => id !== id);
+      return state.filter(id => id !== action.childId);
     default:
       return state;
   };
@@ -75,7 +75,6 @@ const deleteMany = (state, ids) => {
 
 export default (state = {}, action) => {
   const { nodeId } = action;
-
   if (typeof nodeId === 'undefined') {
     return state;
   };
@@ -83,7 +82,7 @@ export default (state = {}, action) => {
   if (action.type === DELETE_NODE) {
     const descendantIds = getAllDescendantIds(state, nodeId);
     console.log(descendantIds);
-    return deleteMany(state, [ ...descendantIds ]);
+    return deleteMany(state, [ nodeId, ...descendantIds ]);
   };
 
   return {
