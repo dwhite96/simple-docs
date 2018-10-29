@@ -7,6 +7,11 @@
   overflow: scroll;
 }
 
+#file-list{
+  position: relative;
+  left: 23px;
+}
+
 #folder-dropdown{
   float: right;
 }
@@ -14,4 +19,9 @@
 .icon{
   color: lightgray;
   text-decoration: none;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0px;
 }

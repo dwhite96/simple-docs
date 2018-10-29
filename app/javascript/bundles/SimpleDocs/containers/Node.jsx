@@ -59,7 +59,7 @@ export class Node extends Component {
           {' '}
           <Icon name='folder open' />
           <FolderRenderer id={id} name={name} />
-          <ul style={{ listStyleType: 'none' }}>
+          <ul>
             {childIds.map(this.renderChild)}
           </ul>
           <FileRenderer filenames={filenames} />
