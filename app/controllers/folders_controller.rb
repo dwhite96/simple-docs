@@ -42,7 +42,9 @@ class FoldersController < ApplicationController
     # Generate :js response to close rails form modal and
     #   then broadcast data via websocket to react component.
     if @folder.save
-      respond_to :js
+      respond_to do |format|
+        format.js { render 'closeModal.js' }
+      end
       flash.now[:notice] = 'Folder was successfully created.'
       FoldersChannel.broadcast_to(current_user, @folder)
     else
@@ -51,18 +53,15 @@ class FoldersController < ApplicationController
   end
 
   # PATCH/PUT /folders/1
-  # PATCH/PUT /folders/1.json
   def update
-    add_more_files(folder_params['files']) if folder_params['files']
-
-    respond_to do |format|
-      if @folder.update(folder_params)
-        format.html { redirect_to root_path, notice: 'Folder was successfully updated.' }
-        format.json { render :show, status: :ok, location: @folder }
-      else
-        format.html { render :edit }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
+    if @folder.update(folder_params)
+      respond_to do |format|
+        format.js { render 'closeModal.js' }
       end
+      flash.now[:notice] = 'Folder was successfully updated.'
+      FoldersChannel.broadcast_to(current_user, @folder)
+    else
+      flash.now[:error] = 'Folder could not be updated.'
     end
   end
 
@@ -84,11 +83,5 @@ class FoldersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def folder_params
     params.require(:folder).permit(:name, :user_id, :folder_id, {files: []})
-  end
-
-  def add_more_files(new_files)
-    files = @folder.files
-    files += new_files
-    @folder.files = files
   end
 end

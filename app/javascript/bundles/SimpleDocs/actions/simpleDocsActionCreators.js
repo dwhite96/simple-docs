@@ -68,6 +68,8 @@ export const updateFolderNode = folder => dispatch => {
     return deleteFolderNode(folder.id, folder.folder_id, dispatch);
   }
 
+  if ()
+
   const { createNode, addChild } = nodeActions;
 
   const childId = dispatch(createNode(folder.id, folder.name)).nodeId;

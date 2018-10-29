@@ -27,7 +27,13 @@ const FolderRenderer = ({ id, name }) => (
           >
             Upload file
           </a>
-          <Dropdown.Item text='Rename' description='ctrl + r' />
+          <a className='item'
+            data-remote='true'
+            rel='nofollow'
+            href={`/folders/${id}/edit`}
+          >
+            <Dropdown.Item text='Rename' />
+          </a>
           <Dropdown.Item text='Make a copy' />
           <Dropdown.Item icon='folder' text='Move to folder' />
           <a className='item'

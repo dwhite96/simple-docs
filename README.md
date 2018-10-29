@@ -31,7 +31,7 @@ files similar to macOS Finder. Code for this "tree view" is based on <a href="ht
 
 1. Ensure foreman is installed: `gem install foreman`
 2. Run `foreman start -f Procfile.dev-server`
-3. Visit <a href="localhost:3000" target="_blank">localhost:3000</a>
+3. Visit <a href="http://localhost:3000" target="_blank">localhost:3000</a>
 
 ### How to run the test suite
 
