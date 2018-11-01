@@ -51,7 +51,10 @@ const node = (state, action) => {
     case UPDATE_FOLDER_NAME:
       return { ...state, name: action.name };
     case APPEND_NEW_FILE:
-      return [ ...state, action.file ];
+      return {
+        ...state,
+        filenames: action.filenames
+      };
     default:
       return state;
   };

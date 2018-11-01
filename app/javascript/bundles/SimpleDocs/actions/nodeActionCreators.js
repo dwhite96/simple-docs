@@ -56,3 +56,9 @@ export const updateFolderName = (nodeId, name) => ({
   nodeId,
   name
 });
+
+export const appendNewFile = (nodeId, filenames) => ({
+  type: APPEND_NEW_FILE,
+  nodeId,
+  filenames
+});

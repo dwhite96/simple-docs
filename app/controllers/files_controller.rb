@@ -3,33 +3,32 @@ class FilesController < ApplicationController
 
   # GET /folders/:folder_id/files/new
   def new
-    respond_to do |format|
-      format.js {}
-    end
+    respond_to :js
   end
 
   # GET /folders/:folder_id/files/:id/edit
   def edit
-    respond_to do |format|
-      format.js {}
-    end
+    respond_to :js
   end
 
   # POST /folders/:folder_id/files
   def create
     add_files(files_params['files']) if files_params['files']
 
-    # flash[:error] = "Failed uploading files" unless @folder.save
-    # redirect_to root_path
+    files = {
+      id: @folder.id,
+      filenames: @folder.extract_filenames,
+      type: 'APPEND_NEW_FILE'
+    }
 
-    respond_to do |format|
-      if @folder.save
-        format.html { redirect_to root_path, notice: 'File was successfully created.' }
-        format.json { render json: { filenames: @folder.extract_filenames } }
-      else
-        format.html { render :new }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
+    if @folder.save
+      respond_to do |format|
+        format.js { render 'closeModal.js' }
       end
+      flash.now[:notice] = 'File was successfully created.'
+      FoldersChannel.broadcast_to(current_user, files)
+    else
+      flash.now[:error] = 'File could not be created.'
     end
   end
 

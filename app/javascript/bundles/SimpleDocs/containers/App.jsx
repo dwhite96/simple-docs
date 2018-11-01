@@ -13,19 +13,23 @@ export class App extends Component {
     addChild: PropTypes.func.isRequired,
     updateFolderName: PropTypes.func.isRequired,
     removeChild: PropTypes.func.isRequired,
-    deleteNode: PropTypes.func.isRequired
+    deleteNode: PropTypes.func.isRequired,
+    appendNewFile: PropTypes.func.isRequired
   };
 
   cable = ActionCable.createConsumer('/cable');
   subscription = false;
 
   handleReceivedData(data) {
+    console.log(data);
+
     const {
       createNode,
       addChild,
       updateFolderName,
       removeChild,
-      deleteNode
+      deleteNode,
+      appendNewFile
     } = this.props;
 
     switch (data.type) {
@@ -37,6 +41,8 @@ export class App extends Component {
       case 'DELETE_NODE':
         removeChild(data.folder_id, data.id);
         return deleteNode(data.id);
+      case 'APPEND_NEW_FILE':
+        return appendNewFile(data.id, data.filenames);
       default:
         return;
     };

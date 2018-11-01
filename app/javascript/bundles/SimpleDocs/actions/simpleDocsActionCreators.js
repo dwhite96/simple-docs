@@ -121,26 +121,3 @@ export const submitNewFolder = folder => dispatch => {
     }
   });
 };
-
-// Post a new file to Rails database;
-const postNewFile = (id, file) => ({
-  [CALL_API]: {
-    types: [],
-    url: `/folders/${id}/files.json`,
-    method: 'POST',
-    file
-  }
-});
-
-// Upload new file thunk.
-export const uploadFile = (id, file) => dispatch => {
-  return dispatch(postNewFile(id, file))
-  .then(response => {
-    console.log(response);
-  });
-};
-
-const appendNewFile = file => ({
-  type: APPEND_NEW_FILE,
-  file
-});
