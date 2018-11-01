@@ -7,6 +7,7 @@ import {
   SHOW_CHILDREN,
   HIDE_CHILDREN,
   CHANGE_CONTENTS_FETCHED_STATUS,
+  UPDATE_FOLDER_NAME,
   APPEND_NEW_FILE
 } from '../constants/nodeConstants';
 
@@ -34,7 +35,6 @@ const node = (state, action) => {
         contentsFetched: false
       };
     case UPDATE_NODE:
-      console.log(action.data);
       return { ...state, ...action.data };
     case ADD_CHILD:
     case REMOVE_CHILD:
@@ -43,17 +43,13 @@ const node = (state, action) => {
         childIds: childIds(state.childIds, action)
       };
     case SHOW_CHILDREN:
-      return {
-        ...state, expanded: true
-      };
+      return { ...state, expanded: true };
     case HIDE_CHILDREN:
-      return {
-        ...state, expanded: false
-      };
+      return { ...state, expanded: false };
     case CHANGE_CONTENTS_FETCHED_STATUS:
-      return {
-        ...state, contentsFetched: true
-      }
+      return { ...state, contentsFetched: true };
+    case UPDATE_FOLDER_NAME:
+      return { ...state, name: action.name };
     case APPEND_NEW_FILE:
       return [ ...state, action.file ];
     default:
@@ -87,6 +83,6 @@ export default (state = {}, action) => {
 
   return {
     ...state,
-    [nodeId]: node(state[nodeId], action),
+    [nodeId]: node(state[nodeId], action)
   };
 };

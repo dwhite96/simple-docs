@@ -46,7 +46,9 @@ class FoldersController < ApplicationController
         format.js { render 'closeModal.js' }
       end
       flash.now[:notice] = 'Folder was successfully created.'
-      FoldersChannel.broadcast_to(current_user, @folder)
+      FoldersChannel.broadcast_to(current_user,
+        @folder.as_json.merge({ type: 'CREATE_NODE' })
+      )
     else
       flash.now[:error] = 'Folder could not be created.'
     end
@@ -59,7 +61,9 @@ class FoldersController < ApplicationController
         format.js { render 'closeModal.js' }
       end
       flash.now[:notice] = 'Folder was successfully updated.'
-      FoldersChannel.broadcast_to(current_user, @folder)
+      FoldersChannel.broadcast_to(current_user,
+        @folder.as_json.merge({ type: 'UPDATE_NODE' })
+      )
     else
       flash.now[:error] = 'Folder could not be updated.'
     end
@@ -67,7 +71,11 @@ class FoldersController < ApplicationController
 
   # DELETE /folders/1
   def destroy
-    deleted_folder = { id: @folder.id, folder_id: @folder.folder_id }
+    deleted_folder = {
+      id: @folder.id,
+      folder_id: @folder.folder_id,
+      type: 'DELETE_NODE'
+    }
     @folder.destroy
     flash.now[:notice] = 'Folder was successfully destroyed.'
     FoldersChannel.broadcast_to(current_user, deleted_folder)

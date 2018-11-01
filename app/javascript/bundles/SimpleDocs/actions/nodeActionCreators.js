@@ -1,11 +1,12 @@
 import {
   CREATE_NODE,
-  UPDATE_NODE,
   DELETE_NODE,
+  UPDATE_NODE,
   ADD_CHILD,
   REMOVE_CHILD,
   SHOW_CHILDREN,
   HIDE_CHILDREN,
+  UPDATE_FOLDER_NAME,
   APPEND_NEW_FILE
 } from '../constants/nodeConstants';
 
@@ -48,4 +49,10 @@ export const showChildren = (nodeId) => ({
 export const hideChildren = (nodeId) => ({
   type: HIDE_CHILDREN,
   nodeId
+});
+
+export const updateFolderName = (nodeId, name) => ({
+  type: UPDATE_FOLDER_NAME,
+  nodeId,
+  name
 });
