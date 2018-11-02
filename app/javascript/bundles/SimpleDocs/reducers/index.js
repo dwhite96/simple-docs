@@ -53,6 +53,8 @@ const node = (state, action) => {
     case APPEND_NEW_FILE:
       return {
         ...state,
+        // Currently updates all filenames under a folder. It's a little
+        //  complex, but would like to actually append new files only.
         filenames: action.filenames
       };
     default:

@@ -9,7 +9,7 @@ const FolderRenderer = ({ id, name }) => (
   <span>
     {' '}
     {name}
-    <div id='folder-dropdown'>
+    <div id='item-dropdown'>
       <Dropdown direction='left' icon='sidebar'>
         <Dropdown.Menu>
           <a id='current_folder_id'
@@ -53,7 +53,7 @@ const FolderRenderer = ({ id, name }) => (
 
 FolderRenderer.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default FolderRenderer;

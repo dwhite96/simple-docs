@@ -10,10 +10,17 @@
 #file-list{
   position: relative;
   left: 23px;
+  right: 23px;
 }
 
-#folder-dropdown{
+#item-dropdown{
   float: right;
+}
+
+#item-dropdown-file{
+  float: right;
+  position: relative;
+  right: 23px;
 }
 
 .icon{
