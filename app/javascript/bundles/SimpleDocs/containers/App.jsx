@@ -14,7 +14,7 @@ export class App extends Component {
     updateFolderName: PropTypes.func.isRequired,
     removeChild: PropTypes.func.isRequired,
     deleteNode: PropTypes.func.isRequired,
-    appendNewFile: PropTypes.func.isRequired
+    updateFileList: PropTypes.func.isRequired
   };
 
   cable = ActionCable.createConsumer('/cable');
@@ -29,7 +29,7 @@ export class App extends Component {
       updateFolderName,
       removeChild,
       deleteNode,
-      appendNewFile
+      updateFileList
     } = this.props;
 
     switch (data.type) {
@@ -41,8 +41,8 @@ export class App extends Component {
       case 'DELETE_NODE':
         removeChild(data.folder_id, data.id);
         return deleteNode(data.id);
-      case 'APPEND_NEW_FILE':
-        return appendNewFile(data.id, data.filenames);
+      case 'UPDATE_FILE_LIST':
+        return updateFileList(data.id, data.filenames);
       default:
         return;
     };

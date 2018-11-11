@@ -8,6 +8,7 @@ class FilesController < ApplicationController
 
   # GET /folders/:folder_id/files/:id/edit
   def edit
+    @folder.attributes.merge(id: params[:id])
     respond_to :js
   end
 
@@ -18,9 +19,11 @@ class FilesController < ApplicationController
     files = {
       id: @folder.id,
       filenames: @folder.extract_filenames,
-      type: 'APPEND_NEW_FILE'
+      type: 'UPDATE_FILE_LIST'
     }
 
+    # Generate :js response to close rails form modal and
+    #   then broadcast data via websocket to react component.
     if @folder.save
       respond_to do |format|
         format.js { render 'closeModal.js' }
@@ -34,20 +37,23 @@ class FilesController < ApplicationController
 
   # PATCH/PUT /folders/:folder_id/files/:id
   def update
-    add_files(files_params['files']) if files_params['files']
+    file = @folder.files[params[:id].to_i]
 
-    # flash[:error] = "Failed uploading files" unless @folder.save
-    # redirect_to root_path
+    if file.rename(files_params[:file], params[:id].to_i) == true
+      new_files = {
+        id: @folder.id,
+        filenames: @folder.extract_filenames,
+        type: 'UPDATE_FILE_LIST'
+      }
 
-
-    respond_to do |format|
-      if @folder.update(files_params)
-        format.html { redirect_to root_path, notice: 'File was successfully updated.' }
-        format.json { render json: { filenames: @folder.extract_filenames } }
-      else
-        format.html { render :edit }
-        format.json { render json: @folder.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        format.js { render 'closeModal.js' }
       end
+
+      flash.now[:notice] = 'File was successfully updated.'
+      FoldersChannel.broadcast_to(current_user, new_files)
+    else
+      flash.now[:error] = 'File could not be updated.'
     end
   end
 
@@ -82,6 +88,6 @@ class FilesController < ApplicationController
   end
 
   def files_params
-    params.permit({files: []})
+    params.require(:folder).permit({files: []}, :file)
   end
 end

@@ -62,7 +62,7 @@ export class Node extends Component {
           <ul>
             {childIds.map(this.renderChild)}
           </ul>
-          <FileRenderer filenames={filenames} />
+          <FileRenderer folder_id={id} filenames={filenames} />
         </div>
       );
     } else {

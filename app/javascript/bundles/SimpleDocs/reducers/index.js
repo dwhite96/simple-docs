@@ -8,7 +8,7 @@ import {
   HIDE_CHILDREN,
   CHANGE_CONTENTS_FETCHED_STATUS,
   UPDATE_FOLDER_NAME,
-  APPEND_NEW_FILE
+  UPDATE_FILE_LIST
 } from '../constants/nodeConstants';
 
 const childIds = (state, action) => {
@@ -29,7 +29,6 @@ const node = (state, action) => {
         id: action.nodeId,
         name: action.name,
         filenames: [],
-        files: [],
         childIds: [],
         expanded: false,
         contentsFetched: false
@@ -50,11 +49,11 @@ const node = (state, action) => {
       return { ...state, contentsFetched: true };
     case UPDATE_FOLDER_NAME:
       return { ...state, name: action.name };
-    case APPEND_NEW_FILE:
+    case UPDATE_FILE_LIST:
       return {
         ...state,
         // Currently updates all filenames under a folder. It's a little
-        //  complex, but would like to actually append new files only.
+        //  complex, but would like to actually update/add single file only.
         filenames: action.filenames
       };
     default:

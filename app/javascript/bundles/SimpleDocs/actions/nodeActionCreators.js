@@ -7,7 +7,7 @@ import {
   SHOW_CHILDREN,
   HIDE_CHILDREN,
   UPDATE_FOLDER_NAME,
-  APPEND_NEW_FILE
+  UPDATE_FILE_LIST
 } from '../constants/nodeConstants';
 
 export * from './simpleDocsActionCreators';
@@ -57,8 +57,8 @@ export const updateFolderName = (nodeId, name) => ({
   name
 });
 
-export const appendNewFile = (nodeId, filenames) => ({
-  type: APPEND_NEW_FILE,
+export const updateFileList = (nodeId, filenames) => ({
+  type: UPDATE_FILE_LIST,
   nodeId,
   filenames
 });

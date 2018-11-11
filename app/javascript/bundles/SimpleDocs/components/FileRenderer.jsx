@@ -4,9 +4,9 @@ import { Icon, Dropdown } from 'semantic-ui-react';
 
 import '../stylesheets/simple_docs.scss';
 
-const FileRenderer = ({ filenames }) => (
+const FileRenderer = ({ folder_id, filenames }) => (
   <ul>
-    {filenames.map(file =>
+    {filenames.map((file, index) =>
       <li key={file} id='file-list'>
         <span>
           <Icon name='file' />
@@ -20,7 +20,7 @@ const FileRenderer = ({ filenames }) => (
                   className='item'
                   data-remote='true'
                   rel='nofollow'
-                  href={`/folders/${file.folder_id}/files/${file.id}/edit`}
+                  href={`/folders/${folder_id}/files/${index}/edit`}
                 >
                   <Dropdown.Item text='Rename' />
                 </a>
