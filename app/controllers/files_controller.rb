@@ -16,18 +16,19 @@ class FilesController < ApplicationController
   def create
     add_files(files_params['files']) if files_params['files']
 
-    files = {
-      id: @folder.id,
-      filenames: @folder.extract_filenames,
-      type: 'UPDATE_FILE_LIST'
-    }
-
     # Generate :js response to close rails form modal and
     #   then broadcast data via websocket to react component.
     if @folder.save
+      files = {
+        id: @folder.id,
+        filenames: @folder.extract_filenames,
+        type: 'UPDATE_FILE_LIST'
+      }
+
       respond_to do |format|
         format.js { render 'closeModal.js' }
       end
+
       flash.now[:notice] = 'File was successfully created.'
       FoldersChannel.broadcast_to(current_user, files)
     else
