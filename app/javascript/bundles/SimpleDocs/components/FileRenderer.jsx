@@ -16,8 +16,7 @@ const FileRenderer = ({ folder_id, filenames }) => (
             <Dropdown direction='left' icon='sidebar'>
               <Dropdown.Menu>
                 <Dropdown.Item text='Download' />
-                <a id='current_folder_id'
-                  className='item'
+                <a className='item'
                   data-remote='true'
                   rel='nofollow'
                   href={`/folders/${folder_id}/files/${index}/edit`}
@@ -31,7 +30,7 @@ const FileRenderer = ({ folder_id, filenames }) => (
                   data-confirm='Are you sure?'
                   rel='nofollow'
                   data-method='delete'
-                  href={`/folders/${file.folder_id}/files/${file.id}`}
+                  href={`/folders/${folder_id}/files/${index}`}
                 >
                   <Dropdown.Item icon='trash' text=' Delete' />
                 </a>
@@ -45,6 +44,7 @@ const FileRenderer = ({ folder_id, filenames }) => (
 );
 
 FileRenderer.propTypes = {
+  folder_id: PropTypes.number.isRequired,
   filenames: PropTypes.array.isRequired
 };
 

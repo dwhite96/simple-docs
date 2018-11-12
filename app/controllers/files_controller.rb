@@ -40,7 +40,7 @@ class FilesController < ApplicationController
     file = @folder.files[params[:id].to_i]
 
     if file.rename(files_params[:file], params[:id].to_i) == true
-      new_files = {
+      updated_file_list = {
         id: @folder.id,
         filenames: @folder.extract_filenames,
         type: 'UPDATE_FILE_LIST'
@@ -51,7 +51,7 @@ class FilesController < ApplicationController
       end
 
       flash.now[:notice] = 'File was successfully updated.'
-      FoldersChannel.broadcast_to(current_user, new_files)
+      FoldersChannel.broadcast_to(current_user, updated_file_list)
     else
       flash.now[:error] = 'File could not be updated.'
     end
@@ -59,9 +59,21 @@ class FilesController < ApplicationController
 
   # DELETE /folders/:folder_id/files/:id
   def destroy
+    # Actually updating folder and deleting file in Folder#files array
     remove_file_at_index(params[:id].to_i)
-    flash[:error] = "Failed deleting file" unless @folder.save
-    redirect_to root_path
+
+    if @folder.save
+      updated_file_list = {
+        id: @folder.id,
+        filenames: @folder.extract_filenames,
+        type: 'UPDATE_FILE_LIST'
+      }
+      flash.now[:notice] = 'File was successfully deleted.'
+      FoldersChannel.broadcast_to(current_user, updated_file_list)
+      head :no_content
+    else
+      flash.now[:error] = "File could not be deleted."
+    end
   end
 
   private
@@ -70,20 +82,17 @@ class FilesController < ApplicationController
     @folder = Folder.find(params[:folder_id])
   end
 
-  def set_file
-    @file = @folder.files[params[:id].to_i]
-  end
-
   def add_files(new_files)
     files = @folder.files
     files += new_files
     @folder.files = files
+    @folder.files_will_change!
   end
 
   def remove_file_at_index(index)
     files = @folder.files
     deleted_file = files.delete_at(index)
-    # deleted_file.try(:remove!) # delete image from S3 if S3 storage implemented
+    p "Deleted #{deleted_file}"
     @folder.files = files
   end
 
