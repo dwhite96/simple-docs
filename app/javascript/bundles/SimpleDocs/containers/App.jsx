@@ -3,8 +3,11 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ActionCable from 'actioncable';
+import { Grid, Divider } from 'semantic-ui-react';
 
+import SideMenu from '../components/SideMenu';
 import Node from './Node';
+import '../stylesheets/simple_docs.scss';
 import * as actions from '../actions/nodeActionCreators';
 
 export class App extends Component {
@@ -61,9 +64,16 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <hr />
-        <Node id='1' />
-        <hr />
+        <Grid divided>
+          <Grid.Column width={2}>
+            <SideMenu />
+          </Grid.Column>
+          <Grid.Column stretched width={12}>
+            <hr />
+            <Node id='1' />
+            <hr />
+          </Grid.Column>
+        </Grid>
       </div>
     );
   };

@@ -37,7 +37,8 @@
 
       <%= redux_store_hydration_data %>
 
-      <%= debug(params) if Rails.env.development? %>
+      <%= debug(params.inspect) if Rails.env.development? %>
+      <% console %>
     </div>
   </body>
 </html>
