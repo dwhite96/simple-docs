@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react';
 
 export default class SideMenu extends Component {
-  state = { activeItem: 'account' };
+  state = { activeItem: 'documents' };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -12,23 +12,20 @@ export default class SideMenu extends Component {
     return (
       <Menu fluid secondary vertical>
         <Menu.Item
-          name='account'
-          active={activeItem === 'account'}
+          name='documents'
+          active={activeItem === 'documents'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name='settings'
-          active={activeItem === 'settings'}
+          name='photos'
+          active={activeItem === 'photos'}
           onClick={this.handleItemClick}
         />
-        <Dropdown item text='Display Options'>
-          <Dropdown.Menu>
-            <Dropdown.Header>Text Size</Dropdown.Header>
-            <Dropdown.Item>Small</Dropdown.Item>
-            <Dropdown.Item>Medium</Dropdown.Item>
-            <Dropdown.Item>Large</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Menu.Item
+          name='deleted files'
+          active={activeItem === 'deleted files'}
+          onClick={this.handleItemClick}
+        />
       </Menu>
     );
   };

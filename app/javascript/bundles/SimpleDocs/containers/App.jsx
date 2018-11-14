@@ -65,10 +65,10 @@ export class App extends Component {
     return (
       <div>
         <Grid divided>
-          <Grid.Column width={2}>
+          <Grid.Column id='main_folder_area' width={2}>
             <SideMenu />
           </Grid.Column>
-          <Grid.Column stretched width={12}>
+          <Grid.Column id='main_folder_area' stretched width={12}>
             <hr />
             <Node id='1' />
             <hr />

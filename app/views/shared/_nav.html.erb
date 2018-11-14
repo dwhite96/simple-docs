@@ -1,5 +1,10 @@
-<div id="nav" class="ui top stackable fixed menu">
-  <%= link_to "SimpleDocs", root_path, class: "link item" %>
+<div class="ui top stackable fixed text menu">
+  <div class="link item">
+    <h3>
+      <%= link_to "SimpleDocs", root_path %>
+    </h3>
+  </div>
+  <div class="ui vertical divider"></div>
 
   <div class="right menu">
     <% if user_signed_in? %>
