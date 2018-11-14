@@ -12,9 +12,9 @@
   </head>
 
   <body>
-    <div class="modal" id="modal-window" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class='modal' id='modal-window' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+      <div class='modal-dialog' role='document'>
+        <div class='modal-content'>
         </div>
       </div>
     </div>
@@ -31,10 +31,12 @@
         <% end -%>
       </div>
     </header>
+    <div id='main_folder_area'>
 
-    <%= yield %>
+      <%= yield %>
 
-    <%= redux_store_hydration_data %>
+      <%= redux_store_hydration_data %>
+    </div>
 
     <% console %>
   </body>
