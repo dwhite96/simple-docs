@@ -25,7 +25,8 @@ files similar to macOS Finder. Code for this "tree view" is based on <a href="ht
 1. Clone the app: `git clone https://github.com/dwhite96/simple-docs.git` and `cd simple-docs/`
 2. Install dependencies: `bundle install && yarn install`
 3. Create and initialize the database: `rails db:create db:migrate db:seed`
-    - This will seed the database with some folders so you can immediately demo the app.
+    - This will seed the database with a user and some folders so you can immediately demo the app.
+      See seeds.rb file for this user's username and password.
 
 ### Starting the Rails and Node servers in development environment
 
