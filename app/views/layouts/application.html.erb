@@ -20,18 +20,17 @@
     </div>
     <header>
       <%= render "shared/nav" %>
+    </header>
+    <div id='main_page_area'>
+      <div>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: name %>
+        <% end %>
+      </div>
 
       <% if !user_signed_in? %>
         <h1>Welcome to SimpleDocs!</h1>
       <% end %>
-
-      <div>
-        <% flash.each do |name, msg| -%>
-          <%= content_tag :div, msg, class: name %>
-        <% end -%>
-      </div>
-    </header>
-    <div id='main_folder_area'>
 
       <%= yield %>
 
