@@ -62,6 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create_default_folders
-    p @user
+    Folder.create!(name: "Documents", user_id: current_user.id)
+    Folder.create!(name: "Photos", user_id: current_user.id)
   end
 end

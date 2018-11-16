@@ -62,6 +62,7 @@ export class App extends Component {
   };
 
   render() {
+    const { id } = this.props;
     return (
       <div>
         <Grid divided>
@@ -69,9 +70,7 @@ export class App extends Component {
             <SideMenu />
           </Grid.Column>
           <Grid.Column stretched width={12}>
-            <hr />
-            <Node id='1' />
-            <hr />
+            <Node id={id} />
           </Grid.Column>
         </Grid>
       </div>
@@ -80,7 +79,7 @@ export class App extends Component {
 };
 
 const mapStateToProps = state => {
-  return state;
+  return state[Object.keys(state)[0]];
 };
 
 export default connect(mapStateToProps, actions)(App);
