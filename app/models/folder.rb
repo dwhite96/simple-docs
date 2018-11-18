@@ -2,7 +2,7 @@ class Folder < ApplicationRecord
   validates :name, presence: true
 
   belongs_to :user
-  has_many :contents, class_name: "Folder", dependent: :destroy
+  has_many :subfolders, class_name: "Folder", dependent: :destroy
 
   mount_uploaders :files, FileUploader
 
