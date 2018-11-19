@@ -14,21 +14,20 @@ User.create!(
 )
 
 Folder.create!(name: "Documents", user_id: 1)
+Folder.create!(name: "Photos", user_id: 1)
 
 10.times do |n|
   Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 1)
 end
 
 5.times do |n|
-  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 2)
-end
-
-5.times do |n|
   Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 3)
 end
 
-3.times do |n|
-  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 12)
+5.times do |n|
+  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 4)
 end
 
-Folder.create!(name: "Photos", user_id: 1)
+3.times do |n|
+  Folder.create!(name: Faker::Lorem.word, user_id: 1, folder_id: 13)
+end
