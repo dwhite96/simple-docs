@@ -7,22 +7,22 @@ import reducers from '../reducers/index';
 
 const logger = createLogger();
 
-function generateRootFolderTree(railsProps) {
-  const rootId = railsProps.id;
+function generateDefaultFolderTree(railsProps) {
   console.log(railsProps)
+  const defaultFolder = railsProps[Object.keys(railsProps)[0]];
 
   const obj1 = {
-    [rootId]: {
-      id: rootId,
-      name: railsProps.name,
-      filenames: railsProps.filenames,
-      childIds: extractFolderIds(railsProps),
+    [defaultFolder.id]: {
+      id: defaultFolder.id,
+      name: defaultFolder.name,
+      filenames: defaultFolder.filenames,
+      childIds: extractFolderIds(defaultFolder),
       expanded: true,
       contentsFetched: true
     }
   };
 
-  const obj2 = railsProps.contents.reduce(function(acc, cur, i) {
+  const obj2 = defaultFolder.subfolders.reduce(function(acc, cur, i) {
     acc[cur.id] = cur;
     cur.childIds = [];
     cur.expanded = false;
@@ -35,12 +35,12 @@ function generateRootFolderTree(railsProps) {
 
 function extractFolderIds(folder) {
   return (
-    folder.contents.map(item => { return item.id; })
+    folder.subfolders.map(item => { return item.id; })
   );
 };
 
 const configureStore = (railsProps) => {
-  const folderProps = generateRootFolderTree(railsProps);
+  const folderProps = generateDefaultFolderTree(railsProps);
   const newProps = { ...folderProps };
   console.log("Preloaded State:", newProps);
 

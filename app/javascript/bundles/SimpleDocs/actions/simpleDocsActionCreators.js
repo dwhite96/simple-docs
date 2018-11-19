@@ -52,7 +52,7 @@ export const fetchFolderContents = id => dispatch => {
 };
 
 function createFolderNodes(id, data, dispatch) {
-  data.contents.map(folder => {
+  data.subfolders.map(folder => {
     const { createNode, addChild } = nodeActions;
     const childId = dispatch(createNode(folder.id, folder.name)).nodeId;
     dispatch(addChild(id, childId));

@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Dropdown } from 'semantic-ui-react';
 
-import '../stylesheets/simple_docs.scss';
-
 const FileRenderer = ({ folder_id, filenames }) => (
   <ul>
     {filenames.map((file, index) =>
-      <li key={file} id='file-list'>
+      <li key={file}>
         <span>
           <Icon name='file' />
           {' '}

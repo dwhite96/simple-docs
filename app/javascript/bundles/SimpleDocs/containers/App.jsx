@@ -6,12 +6,13 @@ import ActionCable from 'actioncable';
 import { Grid, Divider } from 'semantic-ui-react';
 
 import SideMenu from '../components/SideMenu';
-import Node from './Node';
-import '../stylesheets/simple_docs.scss';
+import FolderTreeView from '../components/FolderTreeView';
 import * as actions from '../actions/nodeActionCreators';
 
 export class App extends Component {
   static propTypes = {
+    id: PropTypes.number.isRequired,
+    childIds: PropTypes.array.isRequired,
     createNode: PropTypes.func.isRequired,
     addChild: PropTypes.func.isRequired,
     updateFolderName: PropTypes.func.isRequired,
@@ -62,18 +63,17 @@ export class App extends Component {
   };
 
   render() {
-    const { id } = this.props;
+    const { id, name, childIds, filenames } = this.props;
+
     return (
-      <div>
-        <Grid divided>
-          <Grid.Column width={2}>
-            <SideMenu />
-          </Grid.Column>
-          <Grid.Column stretched width={12}>
-            <Node id={id} />
-          </Grid.Column>
-        </Grid>
-      </div>
+      <Grid divided>
+        <Grid.Column width={2}>
+          <SideMenu id={id} name={name}/>
+        </Grid.Column>
+        <Grid.Column stretched width={12}>
+          <FolderTreeView id={id} childIds={childIds} filenames={filenames}/>
+        </Grid.Column>
+      </Grid>
     );
   };
 };

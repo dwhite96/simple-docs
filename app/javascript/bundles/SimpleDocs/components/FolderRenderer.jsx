@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
 
-import '../stylesheets/simple_docs.scss';
-
 const FolderRenderer = ({ id, name }) => (
   <span>
     {' '}

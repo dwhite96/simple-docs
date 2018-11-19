@@ -10,7 +10,15 @@ import FileRenderer from '../components/FileRenderer';
 
 export class Node extends Component {
   static propTypes = {
-    contentsFetched: PropTypes.bool.isRequired
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    childIds: PropTypes.array.isRequired,
+    filenames: PropTypes.array,
+    expanded: PropTypes.bool.isRequired,
+    contentsFetched: PropTypes.bool.isRequired,
+    fetchFolderContents: PropTypes.func.isRequired,
+    showChildren: PropTypes.func.isRequired,
+    hideChildren: PropTypes.func.isRequired
   };
 
   handleExpandClick = e => {
@@ -62,7 +70,9 @@ export class Node extends Component {
           <ul>
             {childIds.map(this.renderChild)}
           </ul>
-          <FileRenderer folder_id={id} filenames={filenames} />
+          <div style={{ position: 'relative', left: '23px' }}>
+            <FileRenderer folder_id={id} filenames={filenames} />
+          </div>
         </div>
       );
     } else {
