@@ -26,10 +26,8 @@ class User < ApplicationRecord
   end
 
   def top_level_folders
-    folders_by_id = folders.where(folder_id: nil).map do |f|
-      [f.id, FolderSerializer.new(f).as_json.merge({ filenames: f.extract_filenames })]
+    folders.where(folder_id: nil).map do |f|
+      FolderSerializer.new(f).as_json.merge({ filenames: f.extract_filenames })
     end
-
-    folders_by_id.to_h
   end
 end

@@ -5,8 +5,7 @@ class FoldersController < ApplicationController
   # GET /folders.json
   def index
     top_level_folders = current_user.top_level_folders
-
-    redux_store("configureStore", props: top_level_folders)
+    redux_store("configureStore", props: {data: top_level_folders})
   end
 
   # GET /folders/1

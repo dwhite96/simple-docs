@@ -7,41 +7,50 @@ import reducers from '../reducers/index';
 
 const logger = createLogger();
 
-function generateDefaultFolderTree(railsProps) {
-  console.log(railsProps)
-  const defaultFolder = railsProps[Object.keys(railsProps)[0]];
+function buildPreloadedState(railsProps) {
+  const obj = buildTopLevelFolderObjects(railsProps.data);
+  return Object.assign({}, obj);
+};
 
-  const obj1 = {
-    [defaultFolder.id]: {
-      id: defaultFolder.id,
-      name: defaultFolder.name,
-      filenames: defaultFolder.filenames,
-      childIds: extractFolderIds(defaultFolder),
-      expanded: true,
-      contentsFetched: true
-    }
-  };
+function buildTopLevelFolderObjects(folders) {
+  return folders.reduce(function(acc, folder) {
+    const obj1 = {
+      [folder.id]: {
+        id: folder.id,
+        name: folder.name,
+        filenames: folder.filenames,
+        childIds: []
+      }
+    };
 
-  const obj2 = defaultFolder.subfolders.reduce(function(acc, cur, i) {
-    acc[cur.id] = cur;
-    cur.childIds = [];
-    cur.expanded = false;
-    cur.contentsFetched = false;
-    return acc;
+    const obj2 = buildSubfolderObjects(folder.subfolders);
+
+    function buildSubfolderObjects(subfolders) {
+      return subfolders.reduce(function(acc, subfolder) {
+        const obj3 = {
+          [subfolder.id]: {
+            id: subfolder.id,
+            name: subfolder.name,
+            childIds: [],
+            expanded: false,
+            contentsFetched: false
+          }
+        };
+
+        obj1[Object.keys(obj1)[0]].childIds.push(subfolder.id);
+
+        return Object.assign({}, acc, obj3);
+      }, {});
+    };
+
+    return Object.assign({}, acc, obj1, obj2);
   }, {});
-
-  return Object.assign({}, obj1, obj2);
 };
 
-function extractFolderIds(folder) {
-  return (
-    folder.subfolders.map(item => { return item.id; })
-  );
-};
-
-const configureStore = (railsProps) => {
-  const folderProps = generateDefaultFolderTree(railsProps);
-  const newProps = { ...folderProps };
+const configureStore = railsProps => {
+  console.log(railsProps);
+  const defaultFolderProps = buildPreloadedState(railsProps);
+  const newProps = { ...defaultFolderProps };
   console.log("Preloaded State:", newProps);
 
   return createStore(
