@@ -22,8 +22,9 @@ class SideMenu extends Component {
 
   state = { activeItem: this.props.folders[this.props.folderIds[0]].name };
 
-  handleFolderClick = folderId => {
-    const { name } = this.props.folders[folderId]
+  handleFolderClick = (folderId, e) => {
+    e.preventDefault();
+    const { name } = this.props.folders[folderId];
 
     if (this.state.activeItem !== name) {
       this.setState({ activeItem: name });
@@ -47,7 +48,7 @@ class SideMenu extends Component {
               <Menu.Item
                 name={name}
                 active={activeItem === name}
-                onClick={(e) => this.handleFolderClick(folderId)}
+                onClick={(e) => this.handleFolderClick(folderId, e)}
               />
             </li>
           );
