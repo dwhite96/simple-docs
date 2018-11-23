@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 import {
   ADD_CHILD,
   REMOVE_CHILD,
@@ -10,6 +12,8 @@ import {
   UPDATE_FOLDER_NAME,
   UPDATE_FILE_LIST
 } from '../constants/nodeConstants';
+
+import { SELECT_TOP_LEVEL_FOLDER } from '../constants/simpleDocsConstants';
 
 const childIds = (state, action) => {
   switch (action.type) {
@@ -61,6 +65,15 @@ const node = (state, action) => {
   };
 };
 
+const sideMenu = (state, action) => {
+  switch (action.type) {
+    case SELECT_TOP_LEVEL_FOLDER:
+      return action.nodeId
+    default:
+      return state;
+  };
+};
+
 const getAllDescendantIds = (state, nodeId) => (
   state[nodeId].childIds.reduce((acc, childId) => (
     [ ...acc, childId, ...getAllDescendantIds(state, childId) ]
@@ -73,7 +86,7 @@ const deleteMany = (state, ids) => {
   return state;
 };
 
-export default (state = {}, action) => {
+const reducers = (state = {}, action) => {
   const { nodeId } = action;
   if (typeof nodeId === 'undefined') {
     return state;
@@ -87,6 +100,9 @@ export default (state = {}, action) => {
 
   return {
     ...state,
-    [nodeId]: node(state[nodeId], action)
+    [nodeId]: node(state[nodeId], action),
+    currentlySelectedTopLevelFolderId: sideMenu(state.currentlySelectedTopLevelFolderId, action)
   };
 };
+
+export default reducers;

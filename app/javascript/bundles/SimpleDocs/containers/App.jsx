@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ActionCable from 'actioncable';
 import { Grid, Divider } from 'semantic-ui-react';
+import _ from 'underscore';
 
-import SideMenu from '../components/SideMenu';
+import SideMenu from './SideMenu';
 import FolderTreeView from '../components/FolderTreeView';
 import * as actions from '../actions/nodeActionCreators';
 
 export class App extends Component {
   static propTypes = {
-    id: PropTypes.number.isRequired,
-    childIds: PropTypes.array.isRequired,
+    currentlySelectedTopLevelFolderId: PropTypes.number.isRequired,
     createNode: PropTypes.func.isRequired,
     addChild: PropTypes.func.isRequired,
     updateFolderName: PropTypes.func.isRequired,
@@ -63,15 +63,17 @@ export class App extends Component {
   };
 
   render() {
-    const { id, name, childIds, filenames } = this.props;
+    const { currentlySelectedTopLevelFolderId } = this.props;
+    const selectedFolder = this.props[currentlySelectedTopLevelFolderId];
+    const { id, childIds, filenames } = selectedFolder;
 
     return (
       <Grid divided>
         <Grid.Column width={2}>
-          <SideMenu id={id} name={name}/>
+          <SideMenu />
         </Grid.Column>
         <Grid.Column stretched width={12}>
-          <FolderTreeView id={id} childIds={childIds} filenames={filenames}/>
+          <FolderTreeView id={id} childIds={childIds} filenames={filenames} />
         </Grid.Column>
       </Grid>
     );
@@ -79,7 +81,7 @@ export class App extends Component {
 };
 
 const mapStateToProps = state => {
-  return state[Object.keys(state)[0]];
+  return state;
 };
 
 export default connect(mapStateToProps, actions)(App);

@@ -4,6 +4,7 @@ import fetch from 'cross-fetch'
 import { CALL_API } from '../middleware/api';
 
 import {
+  SELECT_TOP_LEVEL_FOLDER,
   CHANGE_CONTENTS_FETCHED_STATUS,
   FOLDER_CONTENTS_REQUEST,
   FOLDER_CONTENTS_SUCCESS,
@@ -16,6 +17,11 @@ import {
   NEW_FILE_FAILURE
 } from '../constants/simpleDocsConstants';
 import * as nodeActions from './nodeActionCreators';
+
+export const selectTopLevelFolder = folderId => ({
+  type: SELECT_TOP_LEVEL_FOLDER,
+  nodeId: folderId
+});
 
 export const changeContentsFetchedStatus = nodeId => ({
   type: CHANGE_CONTENTS_FETCHED_STATUS,

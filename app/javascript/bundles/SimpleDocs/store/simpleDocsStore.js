@@ -9,10 +9,15 @@ const logger = createLogger();
 
 function buildPreloadedState(railsProps) {
   const obj = buildTopLevelFolderObjects(railsProps.data);
-  return Object.assign({}, obj);
+  const defaultFolder = {
+    currentlySelectedTopLevelFolderId: obj[Object.keys(obj)[0]].id
+  };
+  return Object.assign({}, obj, defaultFolder);
 };
 
 function buildTopLevelFolderObjects(folders) {
+  const topLevelFolderIds = { topLevelFolderIds: [] };
+
   return folders.reduce(function(acc, folder) {
     const obj1 = {
       [folder.id]: {
@@ -43,7 +48,8 @@ function buildTopLevelFolderObjects(folders) {
       }, {});
     };
 
-    return Object.assign({}, acc, obj1, obj2);
+    topLevelFolderIds.topLevelFolderIds.push(folder.id);
+    return Object.assign({}, acc, topLevelFolderIds, obj1, obj2);
   }, {});
 };
 
