@@ -9,8 +9,7 @@ const FolderRenderer = ({ id, name }) => (
     <div id='item-dropdown'>
       <Dropdown direction='left' icon='sidebar'>
         <Dropdown.Menu>
-          <a id='current_folder_id'
-            className='item'
+          <a className='item'
             data-remote='true'
             rel='nofollow'
             href={`/folders/new?folder_id=${id}`}

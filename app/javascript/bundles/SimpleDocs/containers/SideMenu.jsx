@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'underscore';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Divider } from 'semantic-ui-react';
 
 import { selectTopLevelFolder } from '../actions/nodeActionCreators';
 
@@ -36,10 +36,31 @@ class SideMenu extends Component {
 
   render() {
     const { activeItem } = this.state;
-    const { folderIds, folders } = this.props;
+    const { folderIds, folders, currentlySelectedFolderId } = this.props;
 
     return (
       <Menu fluid secondary vertical>
+        <Menu.Menu size='mini'>
+          <li>
+            <Menu.Item
+              data-remote='true'
+              rel='nofollow'
+              href={`/folders/new?folder_id=${currentlySelectedFolderId}`}
+            >
+              New folder
+            </Menu.Item>
+          </li>
+          <li>
+            <Menu.Item
+              data-remote='true'
+              rel='nofollow'
+              href={`/folders/${currentlySelectedFolderId}/files/new`}
+            >
+              Upload file
+            </Menu.Item>
+          </li>
+        </Menu.Menu>
+        <Divider />
         {folderIds.map((folderId) => {
           const { name } = folders[folderId]
 
@@ -49,7 +70,9 @@ class SideMenu extends Component {
                 name={name}
                 active={activeItem === name}
                 onClick={(e) => this.handleFolderClick(folderId, e)}
-              />
+              >
+                {name}
+              </Menu.Item>
             </li>
           );
         })}
@@ -58,7 +81,9 @@ class SideMenu extends Component {
             name='deleted files'
             active={activeItem === 'deleted files'}
             onClick={this.handleFolderClick}
-          />
+          >
+            Deleted files
+          </Menu.Item>
         </li>
       </Menu>
     );
@@ -70,7 +95,8 @@ const mapStateToProps = state => {
 
   return {
     folderIds: folderIds,
-    folders: _.pick(state, ...folderIds)
+    folders: _.pick(state, ...folderIds),
+    currentlySelectedFolderId: state.currentlySelectedTopLevelFolderId
   };
 };
 
