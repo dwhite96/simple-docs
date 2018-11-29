@@ -68,7 +68,7 @@ export class App extends Component {
     const { id, childIds, filenames } = selectedFolder;
 
     return (
-      <Grid divided>
+      <Grid>
         <Grid.Column width={2}>
           <SideMenu />
         </Grid.Column>

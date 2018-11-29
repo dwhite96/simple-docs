@@ -39,53 +39,59 @@ class SideMenu extends Component {
     const { folderIds, folders, currentlySelectedFolderId } = this.props;
 
     return (
-      <Menu fluid secondary vertical>
-        <Menu.Menu size='mini'>
-          <li>
-            <Menu.Item
-              data-remote='true'
-              rel='nofollow'
-              href={`/folders/new?folder_id=${currentlySelectedFolderId}`}
-            >
-              New folder
-            </Menu.Item>
-          </li>
-          <li>
-            <Menu.Item
-              data-remote='true'
-              rel='nofollow'
-              href={`/folders/${currentlySelectedFolderId}/files/new`}
-            >
-              Upload file
-            </Menu.Item>
-          </li>
-        </Menu.Menu>
-        <Divider />
-        {folderIds.map((folderId) => {
-          const { name } = folders[folderId]
+      <div id='side-bar'>
+        <div id='side-bar-menu'>
+          <Menu fluid secondary vertical inverted fixed={'left'}>
+            <div id='side-menu'>
+              <Menu.Menu size='mini'>
+                <li>
+                  <Menu.Item
+                    data-remote='true'
+                    rel='nofollow'
+                    href={`/folders/new?folder_id=${currentlySelectedFolderId}`}
+                  >
+                    New folder
+                  </Menu.Item>
+                </li>
+                <li>
+                  <Menu.Item
+                    data-remote='true'
+                    rel='nofollow'
+                    href={`/folders/${currentlySelectedFolderId}/files/new`}
+                  >
+                    Upload file
+                  </Menu.Item>
+                </li>
+              </Menu.Menu>
+              <Divider />
+              {folderIds.map((folderId) => {
+                const { name } = folders[folderId]
 
-          return (
-            <li key={folderId}>
-              <Menu.Item
-                name={name}
-                active={activeItem === name}
-                onClick={(e) => this.handleFolderClick(folderId, e)}
-              >
-                {name}
-              </Menu.Item>
-            </li>
-          );
-        })}
-        <li>
-          <Menu.Item
-            name='deleted files'
-            active={activeItem === 'deleted files'}
-            onClick={this.handleFolderClick}
-          >
-            Deleted files
-          </Menu.Item>
-        </li>
-      </Menu>
+                return (
+                  <li key={folderId}>
+                    <Menu.Item
+                      name={name}
+                      active={activeItem === name}
+                      onClick={(e) => this.handleFolderClick(folderId, e)}
+                    >
+                      {name}
+                    </Menu.Item>
+                  </li>
+                );
+              })}
+              <li>
+                <Menu.Item
+                  name='deleted files'
+                  active={activeItem === 'deleted files'}
+                  onClick={this.handleFolderClick}
+                >
+                  Deleted files
+                </Menu.Item>
+              </li>
+            </div>
+          </Menu>
+        </div>
+      </div>
     );
   };
 };

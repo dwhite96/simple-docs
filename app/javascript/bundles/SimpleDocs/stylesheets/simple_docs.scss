@@ -1,3 +1,27 @@
+#side-bar{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 180px;
+  background: rgb(27, 28, 29);
+  overflow-x: hidden;
+  flex: 1 1 0%;
+}
+
+#side-bar-menu{
+  flex: 1 1 0%;
+  overflow-y: scroll;
+}
+
+#side-menu{
+  padding-top: 50px;
+  padding-left: 10px;
+  padding-right: 1100px;
+}
+
 #item-dropdown{
   float: right;
 }
