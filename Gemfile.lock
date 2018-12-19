@@ -143,7 +143,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     parallel (1.12.1)
-    parser (2.5.1.0)
+    parser (2.5.3.0)
       ast (~> 2.4.0)
     pg (1.0.0)
     poltergeist (1.18.1)
@@ -218,18 +218,18 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.57.2)
+    rubocop (0.61.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.5)
+      parser (>= 2.5, != 2.5.1.1)
       powerpack (~> 0.1)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.0, >= 1.0.1)
-    rubocop-rails (1.4.1)
+      unicode-display_width (~> 1.4.0)
+    rubocop-rails_config (0.3.0)
       railties (>= 3.0)
-      rubocop (~> 0.53)
-    ruby-progressbar (1.9.0)
+      rubocop (~> 0.56)
+    ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.5.6)
@@ -317,7 +317,7 @@ DEPENDENCIES
   rails (~> 5.1.5)
   react_on_rails (= 11.0.8)
   rspec-rails (~> 3.7)
-  rubocop-rails
+  rubocop-rails_config
   sass-rails (~> 5.0)
   selenium-webdriver
   semantic-ui-sass
@@ -331,4 +331,4 @@ DEPENDENCIES
   webpacker (~> 3.5)
 
 BUNDLED WITH
-   1.16.1
+   1.17.2
