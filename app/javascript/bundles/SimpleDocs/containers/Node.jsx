@@ -3,10 +3,17 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
+import styled from 'styled-components';
 
 import * as actions from '../actions/nodeActionCreators';
 import FolderRenderer from '../components/FolderRenderer';
 import FileRenderer from '../components/FileRenderer';
+
+const HoverBackground = styled.div`
+  &:hover {
+    background-color: azure !important;
+  }
+`;
 
 export class Node extends Component {
   static propTypes = {
@@ -60,24 +67,28 @@ export class Node extends Component {
     if (expanded) {
       return (
         <div>
-          <a href="#" onClick={this.handleCollapseClick} // eslint-disable-line jsx-a11y/href-no-hash
-          >
-            <Icon name='chevron down' />
-          </a>
-          {' '}
-          <Icon name='folder open' />
-          <FolderRenderer id={id} name={name} />
+          <HoverBackground>
+            <a href="#" onClick={this.handleCollapseClick} // eslint-disable-line jsx-a11y/href-no-hash
+            >
+              <Icon name='chevron down' />
+            </a>
+            {' '}
+            <Icon name='folder open' />
+            <FolderRenderer id={id} name={name} />
+          </HoverBackground>
           <ul>
             {childIds.map(this.renderChild)}
           </ul>
           <div style={{ position: 'relative', left: '23px' }}>
-            <FileRenderer folder_id={id} filenames={filenames} />
+            <HoverBackground>
+              <FileRenderer folder_id={id} filenames={filenames} />
+            </HoverBackground>
           </div>
         </div>
       );
     } else {
       return (
-        <div>
+        <HoverBackground>
           <a href="#" onClick={this.handleExpandClick} // eslint-disable-line jsx-a11y/href-no-hash
           >
             <Icon name='chevron right' />
@@ -85,7 +96,7 @@ export class Node extends Component {
           {' '}
           <Icon name='folder' />
           <FolderRenderer id={id} name={name} />
-        </div>
+        </HoverBackground>
       );
     }
   };
