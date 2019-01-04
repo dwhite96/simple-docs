@@ -11,7 +11,7 @@ import FileRenderer from '../components/FileRenderer';
 
 const HoverBackground = styled.div`
   &:hover {
-    background-color: azure !important;
+    background-color: #edf2f7 !important;
   }
 `;
 
