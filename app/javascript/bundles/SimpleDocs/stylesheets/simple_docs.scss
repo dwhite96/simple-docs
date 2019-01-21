@@ -1,4 +1,4 @@
-#side-bar{
+#side-bar {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -11,38 +11,55 @@
   flex: 1 1 0%;
 }
 
-#side-bar-menu{
+#side-bar-menu {
   flex: 1 1 0%;
   overflow-y: scroll;
 }
 
-#side-menu{
+#side-menu {
   padding-top: 50px;
   padding-left: 10px;
   padding-right: 1100px;
 }
 
-#item-dropdown{
+#item-dropdown {
   float: right;
 }
 
-#item-dropdown-file{
+#item-dropdown-file {
   float: right;
   position: relative;
   right: 23px;
 }
 
-.icon{
+.hover-background {
+  &:hover {
+    background-color: #edf2f7 !important;
+    position: relative;
+    /*width: 90%;*/
+/*    display: inline-flex;
+    resize: inherit;
+    overflow: auto;
+*/
+  }
+
+  &:hover:before {
+    position: absolute;
+    width: 2.5em;
+  }
+}
+
+.icon {
   color: lightgray;
   text-decoration: none;
 }
 
-ul{
+ul {
   list-style-type: none;
   margin: 0px;
 }
 
-li{
+li {
   list-style-type: none;
   margin: 0px;
 }
