@@ -1,5 +1,5 @@
 import React from 'react';
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
@@ -59,8 +59,8 @@ export class Node extends Component {
 
     if (expanded) {
       return (
-        <div>
-          <div className='hover-background'>
+        <Fragment>
+          <div>
             <a href="#" onClick={this.handleCollapseClick} // eslint-disable-line jsx-a11y/href-no-hash
             >
               <Icon name='chevron down' />
@@ -72,14 +72,12 @@ export class Node extends Component {
           <ul>
             {childIds.map(this.renderChild)}
           </ul>
-          <div style={{ position: 'relative', left: '23px' }}>
-            <FileRenderer folder_id={id} filenames={filenames} />
-          </div>
-        </div>
+          <FileRenderer folder_id={id} filenames={filenames} />
+        </Fragment>
       );
     } else {
       return (
-        <div className='hover-background'>
+        <div>
           <a href="#" onClick={this.handleExpandClick} // eslint-disable-line jsx-a11y/href-no-hash
           >
             <Icon name='chevron right' />

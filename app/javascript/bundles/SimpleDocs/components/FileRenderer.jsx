@@ -6,36 +6,48 @@ const FileRenderer = ({ folder_id, filenames }) => (
   <ul>
     {filenames.map((file, index) =>
       <li key={file}>
-        <div className='hover-background'>
-          <span>
+        <div>
+          <span id='filename'>
             <Icon name='file' />
             {' '}
             {file}
-            <div id='item-dropdown-file'>
-              <Dropdown direction='left' icon='sidebar'>
-                <Dropdown.Menu>
+          </span>
+          <span className='item-dropdown'>
+            <Dropdown direction='left' icon='sidebar'>
+              <Dropdown.Menu>
+                <a className='item'
+                  rel='nofollow'
+                >
                   <Dropdown.Item text='Download' />
-                  <a className='item'
-                    data-remote='true'
-                    rel='nofollow'
-                    href={`/folders/${folder_id}/files/${index}/edit`}
-                  >
-                    <Dropdown.Item text='Rename' />
-                  </a>
+                </a>
+                <a className='item'
+                  data-remote='true'
+                  rel='nofollow'
+                  href={`/folders/${folder_id}/files/${index}/edit`}
+                >
+                  <Dropdown.Item text='Rename' />
+                </a>
+                <a className='item'
+                  rel='nofollow'
+                >
                   <Dropdown.Item text='Make a copy' />
-                  <Dropdown.Item icon='folder' text='Move to folder' />
-                  <a className='item'
-                    data-remote='true'
-                    data-confirm='Are you sure?'
-                    rel='nofollow'
-                    data-method='delete'
-                    href={`/folders/${folder_id}/files/${index}`}
-                  >
-                    <Dropdown.Item icon='trash' text=' Delete' />
-                  </a>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+                </a>
+                <a className='item'
+                  rel='nofollow'
+                >
+                  <Dropdown.Item icon='folder' text=' Move to folder' />
+                </a>
+                <a className='item'
+                  data-remote='true'
+                  data-confirm='Are you sure?'
+                  rel='nofollow'
+                  data-method='delete'
+                  href={`/folders/${folder_id}/files/${index}`}
+                >
+                  <Dropdown.Item icon='trash' text=' Delete' />
+                </a>
+              </Dropdown.Menu>
+            </Dropdown>
           </span>
         </div>
       </li>

@@ -1,12 +1,15 @@
 import React from 'react';
+import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown } from 'semantic-ui-react';
 
 const FolderRenderer = ({ id, name }) => (
-  <span>
-    {' '}
-    {name}
-    <div id='item-dropdown'>
+  <Fragment>
+    <span>
+      {' '}
+      {name}
+    </span>
+    <span className='item-dropdown'>
       <Dropdown direction='left' icon='sidebar'>
         <Dropdown.Menu>
           <a className='item'
@@ -30,8 +33,16 @@ const FolderRenderer = ({ id, name }) => (
           >
             <Dropdown.Item text='Rename' />
           </a>
-          <Dropdown.Item text='Make a copy' />
-          <Dropdown.Item icon='folder' text='Move to folder' />
+          <a className='item'
+            rel='nofollow'
+          >
+            <Dropdown.Item text='Make a copy' />
+          </a>
+          <a className='item'
+            rel='nofollow'
+          >
+            <Dropdown.Item icon='folder' text=' Move to folder' />
+          </a>
           <a className='item'
             data-remote='true'
             data-confirm='Are you sure?'
@@ -43,8 +54,8 @@ const FolderRenderer = ({ id, name }) => (
           </a>
         </Dropdown.Menu>
       </Dropdown>
-    </div>
-  </span>
+    </span>
+  </Fragment>
 );
 
 FolderRenderer.propTypes = {
