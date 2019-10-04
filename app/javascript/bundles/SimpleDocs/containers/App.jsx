@@ -3,10 +3,9 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ActionCable from 'actioncable';
-import { Grid, Divider } from 'semantic-ui-react';
 import _ from 'underscore';
 
-import SideMenu from './SideMenu';
+import LeftSideBar from './LeftSideBar';
 import FolderTreeView from '../components/FolderTreeView';
 import * as actions from '../actions/nodeActionCreators';
 
@@ -68,14 +67,12 @@ export class App extends Component {
     const { id, childIds, filenames } = selectedFolder;
 
     return (
-      <Grid>
-        <Grid.Column width={2}>
-          <SideMenu />
-        </Grid.Column>
-        <Grid.Column stretched width={12}>
+      <div id='main-page-area'>
+        <React.Fragment>
+          <LeftSideBar />
           <FolderTreeView id={id} childIds={childIds} filenames={filenames} />
-        </Grid.Column>
-      </Grid>
+        </React.Fragment>
+      </div>
     );
   };
 };

@@ -18,23 +18,20 @@
         </div>
       </div>
     </div>
-    <header>
-      <%= render "shared/nav" %>
-    </header>
-    <div id='main-page-area'>
-      <div>
-        <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, class: name %>
-        <% end %>
-      </div>
-
-      <% if !user_signed_in? %>
-        <h1>Welcome to SimpleDocs!</h1>
+    <div>
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: name %>
       <% end %>
-
-      <%= yield %>
-
-      <%= redux_store_hydration_data %>
     </div>
+
+    <% if !user_signed_in? %>
+      <div class='add-margin'>
+        <h1>Welcome to SimpleDocs!</h1>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+    <%= redux_store_hydration_data %>
   </body>
 </html>

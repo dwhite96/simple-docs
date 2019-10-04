@@ -1,30 +1,24 @@
-#side-bar {
-  position: fixed;
+#main-page-area {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  width: 180px;
-  background: rgb(27, 28, 29);
-  overflow-x: hidden;
-  flex: 1 1 0%;
+  justify-content: flex-start;
 }
 
-#side-bar-menu {
-  flex: 1 1 0%;
+#left-side-bar {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  background: rgb(27, 28, 29);
+  opacity: 0.8;
+  padding-top: 50px;
   overflow-y: scroll;
 }
 
-#side-menu {
-  padding-top: 50px;
-  padding-left: 10px;
-  padding-right: 1100px;
-}
-
-#list{
-  position: relative;
-  left: -17px;
+#folder-list{
+  display: flex;
+  flex-direction: column;
+  width: 915px;
+  margin-top: 40px;
   overflow: hidden;
 }
 

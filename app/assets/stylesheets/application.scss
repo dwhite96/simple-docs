@@ -13,3 +13,25 @@
 */
 
 @import 'bootstrap-custom';
+
+#main-app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#react-component {
+  display: flex;
+  flex-direction: column;
+}
+
+#right-side-bar {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+}
+
+.add-margin {
+  margin-top: 20px;
+  margin-left: 20px;
+}

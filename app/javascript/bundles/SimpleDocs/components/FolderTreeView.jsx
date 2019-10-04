@@ -5,7 +5,7 @@ import Node from '../containers/Node';
 import FileRenderer from './FileRenderer';
 
 const FolderTreeView = ({ id, childIds, filenames }) => (
-  <div id='list'>
+  <div id='folder-list'>
     <ul>
       {childIds.map(childId => (
         <li key={childId}>
