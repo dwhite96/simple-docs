@@ -20,7 +20,8 @@
       <% end %>
 
       <div class="field">
-        <%= form.text_field :file %><br>
+        <%= form.text_field :file,
+          value: folder.files[params[:id].to_i].file.identifier %><br>
       </div>
 
       <div class="actions">

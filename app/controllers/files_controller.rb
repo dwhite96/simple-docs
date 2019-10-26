@@ -8,7 +8,6 @@ class FilesController < ApplicationController
 
   # GET /folders/:folder_id/files/:id/edit
   def edit
-    @folder.attributes.merge(id: params[:id])
     respond_to :js
   end
 
@@ -40,7 +39,7 @@ class FilesController < ApplicationController
   def update
     file = @folder.files[params[:id].to_i]
 
-    if file.rename(files_params[:file], params[:id].to_i) == true
+    if file.rename(files_params[:file], params[:id].to_i)
       updated_file_list = {
         id: @folder.id,
         filenames: @folder.extract_filenames,
@@ -79,25 +78,25 @@ class FilesController < ApplicationController
 
   private
 
-  def set_folder
-    @folder = Folder.find(params[:folder_id])
-  end
+    def set_folder
+      @folder = Folder.find(params[:folder_id])
+    end
 
-  def add_files(new_files)
-    files = @folder.files
-    files += new_files
-    @folder.files = files
-    @folder.files_will_change!
-  end
+    def add_files(new_files)
+      files = @folder.files
+      files += new_files
+      @folder.files = files
+      @folder.files_will_change!
+    end
 
-  def remove_file_at_index(index)
-    files = @folder.files
-    deleted_file = files.delete_at(index)
-    p "Deleted #{deleted_file}"
-    @folder.files = files
-  end
+    def remove_file_at_index(index)
+      files = @folder.files
+      deleted_file = files.delete_at(index)
+      p "Deleted #{deleted_file}"
+      @folder.files = files
+    end
 
-  def files_params
-    params.require(:folder).permit({files: []}, :file)
-  end
+    def files_params
+      params.require(:folder).permit({files: []}, :file)
+    end
 end
