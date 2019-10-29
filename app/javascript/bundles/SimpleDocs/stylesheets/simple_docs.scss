@@ -5,13 +5,16 @@
 }
 
 #left-side-bar {
-  display: flex;
-  flex-direction: column;
   width: 180px;
   background: rgb(27, 28, 29);
   opacity: 0.8;
-  padding-top: 50px;
-  overflow-y: scroll;
+}
+
+#root-page-link {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 40px;
 }
 
 #folder-list{

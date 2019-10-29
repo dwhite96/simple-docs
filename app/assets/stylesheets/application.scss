@@ -26,9 +26,20 @@
 }
 
 #right-side-bar {
+  width: 180px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.side-menu {
   display: flex;
   flex-direction: column;
+  position: -webkit-sticky;
+  position: sticky;
   width: 180px;
+  top: 10px;
+  left: 0;
+  bottom: 0;
 }
 
 .add-margin {

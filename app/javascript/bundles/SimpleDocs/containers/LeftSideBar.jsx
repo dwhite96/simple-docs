@@ -40,54 +40,58 @@ class LeftSideBar extends Component {
 
     return (
       <div id='left-side-bar'>
-        <h3><a href='/'>SimpleDocs</a></h3>
-        <Menu fluid secondary vertical inverted>
-          <Menu.Menu size='mini'>
-            <li>
-              <Menu.Item
-                data-remote='true'
-                rel='nofollow'
-                href={`/folders/new?folder_id=${currentlySelectedFolderId}`}
-              >
-                New folder
-              </Menu.Item>
-            </li>
-            <li>
-              <Menu.Item
-                data-remote='true'
-                rel='nofollow'
-                href={`/folders/${currentlySelectedFolderId}/files/new`}
-              >
-                Upload file
-              </Menu.Item>
-            </li>
-          </Menu.Menu>
-          <Divider />
-          {folderIds.map((folderId) => {
-            const { name } = folders[folderId]
-
-            return (
-              <li key={folderId}>
+        <div class='side-menu'>
+          <div id='root-page-link'>
+            <h3><a href='/'>SimpleDocs</a></h3>
+          </div>
+          <Menu fluid secondary vertical inverted>
+            <Menu.Menu size='mini'>
+              <li>
                 <Menu.Item
-                  name={name}
-                  active={activeItem === name}
-                  onClick={(e) => this.handleFolderClick(folderId, e)}
+                  data-remote='true'
+                  rel='nofollow'
+                  href={`/folders/new?folder_id=${currentlySelectedFolderId}`}
                 >
-                  {name}
+                  New folder
                 </Menu.Item>
               </li>
-            );
-          })}
-          <li>
-            <Menu.Item
-              name='deleted files'
-              active={activeItem === 'deleted files'}
-              onClick={this.handleFolderClick}
-            >
-              Deleted files
-            </Menu.Item>
-          </li>
-        </Menu>
+              <li>
+                <Menu.Item
+                  data-remote='true'
+                  rel='nofollow'
+                  href={`/folders/${currentlySelectedFolderId}/files/new`}
+                >
+                  Upload file
+                </Menu.Item>
+              </li>
+            </Menu.Menu>
+            <Divider />
+            {folderIds.map((folderId) => {
+              const { name } = folders[folderId]
+
+              return (
+                <li key={folderId}>
+                  <Menu.Item
+                    name={name}
+                    active={activeItem === name}
+                    onClick={(e) => this.handleFolderClick(folderId, e)}
+                  >
+                    {name}
+                  </Menu.Item>
+                </li>
+              );
+            })}
+            <li>
+              <Menu.Item
+                name='deleted files'
+                active={activeItem === 'deleted files'}
+                onClick={this.handleFolderClick}
+              >
+                Deleted files
+              </Menu.Item>
+            </li>
+          </Menu>
+        </div>
       </div>
     );
   };
