@@ -5,6 +5,7 @@
 }
 
 #left-side-bar {
+  flex-grow: 0;
   width: 180px;
   background: rgb(27, 28, 29);
   opacity: 0.8;
@@ -20,7 +21,7 @@
 #folder-list{
   display: flex;
   flex-direction: column;
-  width: 915px;
+  width: 100%;
   margin-top: 40px;
   overflow: hidden;
 }

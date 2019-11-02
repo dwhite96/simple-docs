@@ -21,11 +21,13 @@
 }
 
 #react-component {
+  flex-grow: 8;
   display: flex;
   flex-direction: column;
 }
 
 #right-side-bar {
+  flex-grow: 0;
   width: 180px;
   padding-top: 10px;
   padding-left: 10px;
@@ -45,4 +47,10 @@
 .add-margin {
   margin-top: 20px;
   margin-left: 20px;
+}
+
+@media screen and (max-width: 700px) {
+  #main-app {
+    flex-direction: column-reverse;
+  }
 }

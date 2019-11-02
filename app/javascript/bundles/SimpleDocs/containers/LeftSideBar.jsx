@@ -40,7 +40,7 @@ class LeftSideBar extends Component {
 
     return (
       <div id='left-side-bar'>
-        <div class='side-menu'>
+        <div className='side-menu'>
           <div id='root-page-link'>
             <h3><a href='/'>SimpleDocs</a></h3>
           </div>
