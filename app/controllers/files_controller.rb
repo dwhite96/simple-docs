@@ -1,5 +1,19 @@
 class FilesController < ApplicationController
-  before_action :set_folder, only: %i[new edit create update destroy]
+  before_action :set_folder, only: %i[download new edit create update destroy]
+
+  # Implement the following action if the app is deployed
+  # GET /folders/:folder_id/files/:id/download
+  # def download
+  #   file = @folder.files[params[:id].to_i]
+
+  #   if file.download!(#insert url)
+  #     respond_to do |format|
+  #       format.js { head 200 }
+  #     end
+  #   else
+  #     flash.now[:error] = 'File could not be downloaded.'
+  #   end
+  # end
 
   # GET /folders/:folder_id/files/new
   def new
